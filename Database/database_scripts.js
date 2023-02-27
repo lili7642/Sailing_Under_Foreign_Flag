@@ -43,6 +43,7 @@ function get_user_details(userName) {
     userCollect["last_name"] = DB.users[userIndex].last_name;
     userCollect["email"] = DB.users[userIndex].email;
     userCollect["credentials"] = DB.users[userIndex].credentials;
+    userCollect["account"] = account;
 
     return userCollect;
 }

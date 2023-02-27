@@ -24,7 +24,7 @@ $(document).ready(function() {
         }
 
         if (found){
-            $('#login-message').text("Logged in as "+firstname+" "+lastname+"!").removeClass('error').addClass('success').show();
+            $('#login-message').text("Login successful!").removeClass('error').addClass('success').show();
             $('#login_form').hide();
             $('#menu').show();
             $('#order').show();

@@ -1,6 +1,7 @@
 body {
     font-family: Arial, sans-serif;
     background-color: #f1f1f1;
+    height: 100%;
 }
 
 h1{
@@ -79,15 +80,59 @@ input[type="submit"]:hover {
     background-color: #dff0d8;
     color: #3c763d;
 }
+#user-box-wrapper{
+    display: none;
+}
 
 #user-box{
+    height: 100px;
     margin: 5%;
-    padding: 10px;
-    background-color: #dff0d8;
-    color: black;
-    border: 1px solid #ccc;
+    border: 1px solid black;
     border-radius: 5px;
+    overflow: hidden;
+}
+
+#left-side{
+    float: left;
+    width: 75%;
+    padding-bottom: 100%;
+    margin-bottom: -100%;
+}
+
+#left-wrapper{
+    display: grid;
+    line-height: 33.3px;
+
+}
+
+#deposit-button{
     display: none;
+    width: 25%;
+    height: 100%;
+    border: none;
+    border-left: 1px solid black;
+    background-color: #e0fa12;
+    cursor: pointer;
+}
+#deposit-button:hover{
+    background-color: #c9e205;
+    cursor: pointer;
+}
+
+
+#show-account{
+    padding-left: 2%;
+    height: 33%;
+}
+
+#show-name{
+    padding-left: 2%;
+    height: 33%;
+}
+
+#show-cred{
+    padding-left: 2%;
+    height: 33%;
 }
 
 /* Menu styles */
@@ -97,6 +142,7 @@ input[type="submit"]:hover {
     justify-content: center;
     margin: 5%;
 }
+
 
 .menu-item {
     padding: 2%;
@@ -126,6 +172,9 @@ input[type="submit"]:hover {
     padding: 5px 10px;
     font-size: 0.8em;
     cursor: pointer;
+}
+.item-button:active{
+    background-color: #3e8e41;
 }
 
 
