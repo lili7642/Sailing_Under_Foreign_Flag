@@ -1,0 +1,157 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f1f1f1;
+}
+
+h1{
+    margin:5%;
+    text-align: center;
+}
+
+form {
+    background-color: #fff;
+    border-radius: 5px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+#login_buttons{
+    display: flex;
+    justify-content: space-between;
+    margin-left: 20%;
+    margin-right: 20%;
+}
+
+input[type="text"], input[type="password"] {
+    display: block;
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+input[type="submit"] {
+    background-color: #4CAF50;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+input[type="submit"]:hover {
+    background-color: #3e8e41;
+}
+
+#login_as_guest {
+    background-color: #4CAF50;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#login_as_guest:hover {
+    background-color: #3e8e41;
+}
+
+#login-message {
+    margin: 5%;
+    padding: 10px;
+    background-color: #f2dede;
+    color: #a94442;
+    border-radius: 5px;
+    display: none;
+}
+
+#login-message.success {
+    background-color: #dff0d8;
+    color: #3c763d;
+}
+
+#user-box{
+    margin: 5%;
+    padding: 10px;
+    background-color: #dff0d8;
+    color: black;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    display: none;
+}
+
+/* Menu styles */
+#menu {
+    display: none;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 5%;
+}
+
+.menu-item {
+    padding: 2%;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+}
+
+.item-name {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.item-price {
+    font-size: 0.8em;
+    margin-bottom: 5px;
+}
+
+.item-button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    font-size: 0.8em;
+    cursor: pointer;
+}
+
+
+/* Order styles */
+#order {
+    display: none;
+    margin: 5%;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+}
+.order-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 5px;
+}
+.item-qty {
+    font-size: 0.8em;
+    padding: 3px;
+    background-color: #4CAF50;
+    color: white;
+    border-radius: 5px;
+    margin-right: 5px;
+}
+#order-total {
+    margin-top: 10px;
+    font-weight: bold;
+}

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Main</title>
+    <script src="jquery-1.12.0.min.js"></script>
+    <script src="Database/Beverages_reduced.js"></script>
+    <script src="Database/DBLoaded.js"></script>
+    <script src="script.js"></script>
+    <script src="Database/database_scripts.js"></script>
+    <script src="Database/script_funcs.js"></script>
+    <link rel="stylesheet" href="login_style.css">
+</head>
+
+
+
+
+<body>
+    <h1>Sailing under foreign flag</h1>
+    <form id="login_form">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required><br>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password"><br>
+        <div id="login_buttons">
+            <input type="submit" value="Login">
+            <button type="button" id="login_as_guest">Continue as Guest</button>
+        </div>
+    </form>
+    <div id="login-message"></div>
+    <div id="user-box">
+
+        <div id="show-name">
+            Jag är i en user box!
+        </div>
+        <div id="show-account">
+            JAG MED
+        </div>
+    </div>
+
+    <div id="menu">
+        <h2>Menu</h2>
+    </div>
+
+    <div id="order">
+        <h2>Current Order</h2>
+    </div>
+
+    <div id="order-total">
+
+    </div>
+
+</body>
+
+<script>
+    let users = DB.users;
+    let transactions = DB.sold;
+    let balances = DB.account;
+
+    let beers = allBeverages_type("Öl");
+
+</script>
+
+</html>
