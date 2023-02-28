@@ -24,32 +24,75 @@ function show_info_popup(beverage){
         .attr("onclick", "style='display: none;'"); // on click the box disappears
 }
 
+function add_comment(beverage, orderItem){
+    let comment;
+    // clear input field
+    $('#comment-input').val($('#' + beverage.artikelid + '-comment').text());
+
+    //show relevant popup
+    $('#comment-popup label').text('Add comment to '+beverage.namn + ':');
+    $('#comment-popup').show().click(function (e){
+        if($(e.target).attr("id") !== "comment-input"){
+            $(this).hide();
+        }
+    });
+    // take input from comment field
+    $('#comment-popup form').submit(function (e){
+        e.preventDefault();
+        comment = $('#comment-input').val();
+        // add comment div in order
+        $('#' + beverage.artikelid + '-comment').text(comment).show();
+    });
+
+
+
+
+}
+
+
 
 function add_to_order(beverage) {
-    // relevant divs
-    let orderDiv = $('#order-item-wrapper');
-    let orderItem = $('<div class="order-item"></div>');
-    let itemName = $('<span class="item-name"></span>').text(beverage.namn);
-    let itemPrice = $('<span class="item-price"></span>').text(beverage.prisinklmoms + ' SEK');
-
-    // hide this message since order no longer empty
-    $('#empty-order-message').hide();
-
-    // row below is CHAT GPT magic
-    let existingItem = orderDiv.find('.item-name:contains("'+beverage.namn+'")').first().parent('.order-item');
-
     // IF BEVERAGE ALREADY IN ORDER, CHANGE THE DIV INSTEAD OF ADDING
     if (beverage.namn in order){
         order[beverage.namn] += 1;
-        existingItem.find('.item-name').text(beverage.namn + " x" + order[beverage.namn]);
-        existingItem.find('.item-price').text(beverage.prisinklmoms + " SEK");
+        // put 'amount x price SEK' as price
+        $('#' + beverage.artikelid + '-price').html(order[beverage.namn]+" &times "+beverage.prisinklmoms + " SEK");
 
     // ADD ORDER ITEM DIV
     }else{
+        //update order variable
         order[beverage.namn] = 1;
-        orderItem.append(itemName);
+
+        // hide this message since order no longer empty
+        $('#empty-order-message').hide();
+
+        // relevant divs
+        let orderDiv = $('#order-item-wrapper');
+            // put drink article id as div id
+        let orderItem = $('<div class="order-item" id="'+beverage.artikelid +'"></div>');
+        let itemName = $('<span class="item-name" id="'+beverage.artikelid+'-name"></span>').text(beverage.namn);
+        let itemPrice = $('<span class="item-price" id="'+beverage.artikelid+'-price"></span>').text(beverage.prisinklmoms + ' SEK');
+        // comment button div
+        let commentButton = $('<span class="comment-button"></span>').html(' &#128172');
+
+        // wrapper for name and comment button
+        let someWrapper = $('<div></div>')
+
+        // empty comment div that will be hidden;
+        let someComment = $('<div class="comment" id="'+ beverage.artikelid+'-comment"></div>');
+
+        // add the stuff
+        someWrapper.append(itemName);
+        someWrapper.append(commentButton);
+        orderItem.append(someWrapper);
         orderItem.append(itemPrice);
         orderDiv.append(orderItem);
+        orderDiv.append(someComment);
+
+        // COMMENT BUTTON FUNCTIONALITY
+        commentButton.click(function (){
+            add_comment(beverage, orderItem);
+        })
     }
     // UPDATE ORDER TOTAL
     orderTotal += parseFloat(beverage.prisinklmoms);
@@ -66,6 +109,7 @@ function place_order(){
 
     // REMOVE ITEMS FROM BASKET
     $('.order-item').remove();
+    $('.comment').remove();
     // SHOW MESSAGE THAT BASKET IS EMPTY
     $('#empty-order-message').show();
 
@@ -76,7 +120,6 @@ function place_order(){
         current_balance -= temp_total;
         $('#credit').html("<b>Balance: </b>" + current_balance.toFixed(2) + " SEK");
     }
-
 
 
 
