@@ -14,6 +14,18 @@ function allBeverages_type(type) {
     return collector;
 }
 
+function match_search(searchterm){
+    // Using a local variable to collect the items.
+    let collector = [];
+    for (let i = 0; i < DB2.spirits.length; i++) {
+        if (DB2.spirits[i].any().includes(searchterm)){
+            collector.push(DB2.spirits[i]);
+        }
+    }
+    return collector;
+
+}
+
 function get_user_details(userName) {
     let userCollect = {};
     let userID;

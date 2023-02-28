@@ -26,6 +26,7 @@ $(document).ready(function() {
         if (found){
             $('#login-message').text("Login successful!").removeClass('error').addClass('success').show();
             $('#login_form').hide();
+            $('#topnav').show();
             $('#select-category').show();
             $('#menu').show();
             $('#order').show();
@@ -40,6 +41,7 @@ $(document).ready(function() {
     $('#login_as_guest').click(function(){
         $('#login-message').text("Logged in as guest!").removeClass('error').addClass('success').show();
         $('#login_form').hide();
+        $('#topnav').show();
         $('#select-category').show();
         $('#menu').show();
         $('#order').show();
@@ -73,6 +75,35 @@ $(document).ready(function() {
                 addToOrder(beverage);
             });
 
+        }
+    }
+
+    $('#searchform').submit(function(e) {
+        e.preventDefault();
+        let searchterm = $('#searchfield').val();
+        display_search_results(searchterm);
+
+    });
+
+
+    let search_results = {};
+    function display_search_results(searchterm){
+        search_results = match_search(searchterm);
+        for (let each_result of search_results){
+            let menuItem_search = $('<div class="menu-item" draggable="true"></div>');
+            let itemName_search = $('<span class="item-name" style="width:200px;text-align: left"></span>').text(each_result.namn);
+            let typeName_search = $('<span class="item-type"></span>').text(each_result.varugrupp);
+            let itemButton_search = $('<button class="item-button"></button>').text(each_result.prisinklmoms + ' SEK');
+
+
+            menuItem_search.append(itemName_search);
+            menuItem_search.append(typeName_search);
+            menuItem_search.append(itemButton_search);
+            $('searchDiv').append(menuItem_search);
+
+            itemButton_search.click(function () {
+                addToOrder(each_result);
+            });
         }
     }
 

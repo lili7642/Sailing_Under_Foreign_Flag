@@ -135,6 +135,11 @@ input[type="submit"]:hover {
     height: 33%;
 }
 
+#topnav{
+    display:none;
+}
+
+
 #select-category{
     display: none;
     flex-wrap: wrap;
