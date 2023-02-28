@@ -69,12 +69,12 @@ function userDetails(userName) {
 function changeBalance(userName, newAmount) {
 
     // We use this variable to store the userID, since that is the link between the two data bases.
-    var userID;
+    let userID;
 
     // First we find the userID in the user data base.
     //
     for (i = 0; i < DB.users.length; i++) {
-        if (DB.users[i].username == userName) {
+        if (DB.users[i].username === userName) {
             userID = DB.users[i].user_id;
         };
     };
@@ -83,7 +83,7 @@ function changeBalance(userName, newAmount) {
     // and change the account balance.
     //
     for (i = 0; i < DB.account.length; i++) {
-        if (DB.account[i].user_id == userID) {
+        if (DB.account[i].user_id === userID) {
             DB.account[i].creditSEK = newAmount;   // This changes the value in the JSON object.
         };
     };

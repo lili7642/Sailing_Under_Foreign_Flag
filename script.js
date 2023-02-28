@@ -6,6 +6,9 @@ $(document).ready(function() {
     $('#username').val('jorass');
     $('#password').val('b690bc2447d40ea8a6f78345eb979a28');
 
+    let current_user;
+    let current_balance;
+
     $('#login_form').submit(function(e) {
         e.preventDefault();
         let username = $('#username').val();
@@ -17,7 +20,6 @@ $(document).ready(function() {
         for (let user of users) {
             if(user.username === username && user.password === password){
                 found = true;
-                is_guest = false;
                 firstname = user.first_name;
                 lastname = user.last_name;
             }
@@ -25,10 +27,12 @@ $(document).ready(function() {
 
         if (found){
             $('#login-message').text("Login successful!").removeClass('error').addClass('success').show();
+            $('#login-message').click(function(){$(this).hide()});
             $('#login_form').hide();
             $('#menu').show();
             $('#order').show();
-            let current_user = get_user_details(username)
+            current_user = get_user_details(username)
+            current_balance = get_balance(current_user);
             load_user_box(current_user);
         }else{
             $('#login-message').text('Invalid username or password.').removeClass('success').addClass('error').show();
@@ -36,12 +40,36 @@ $(document).ready(function() {
 
     });
 
+    // LOGIN AS GUEST
     $('#login_as_guest').click(function(){
         $('#login-message').text("Logged in as guest!").removeClass('error').addClass('success').show();
         $('#login_form').hide();
         $('#menu').show();
         $('#order').show();
     });
+
+
+    $('#deposit-button').click(function (){
+        $('#popup').show();
+    });
+
+    $('#popup form').submit(function (e){
+        e.preventDefault();
+        let deposit_amount = $('#number-input').val();
+        // CHANGE BALANCE AND UPDATE DIV
+
+        // fake balance, resets on reload
+        current_balance = (Number(current_balance) + Number(deposit_amount)).toString();
+        $('#credit').html("<b>Balance: </b>" + current_balance + " SEK");
+        $('#popup').hide();
+    });
+
+    $('#popup').click(function(e) {
+        if ($(e.target).attr('id') === 'popup') {
+            $('#popup').hide();
+        }
+    });
+
 
 
     let menuDiv = $('#menu');

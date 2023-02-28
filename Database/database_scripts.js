@@ -18,7 +18,6 @@ function get_user_details(userName) {
     let userCollect = {};
     let userID;
     let userIndex;
-    let account;
 
     // Find userid and index
     for (let i = 0; i < DB.users.length; i++) {
@@ -29,13 +28,6 @@ function get_user_details(userName) {
         }
     }
 
-    // get account balance
-    for (let i = 0; i < DB.account.length; i++) {
-        if (DB.account[i].user_id === userID) {
-            account = DB.account[i].creditSEK;
-        }
-    }
-
     // put into dict
     userCollect["user_id"] = DB.users[userIndex].user_id;
     userCollect["username"] = DB.users[userIndex].username;
@@ -43,7 +35,17 @@ function get_user_details(userName) {
     userCollect["last_name"] = DB.users[userIndex].last_name;
     userCollect["email"] = DB.users[userIndex].email;
     userCollect["credentials"] = DB.users[userIndex].credentials;
-    userCollect["account"] = account;
 
     return userCollect;
 }
+
+function get_balance(userinfo){
+    let account;
+    for (let i = 0; i < DB.account.length; i++) {
+        if (DB.users[i].username === userinfo.username) {
+            account = DB.account[i].creditSEK;
+            return account;
+        }
+    }
+}
+

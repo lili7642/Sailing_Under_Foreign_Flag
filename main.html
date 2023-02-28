@@ -16,7 +16,10 @@
 
 
 <body>
+    <!-- TITLE -->
     <h1>Sailing under foreign flag</h1>
+
+    <!-- LOGIN PAGE -->
     <form id="login_form">
         <label for="username">Username:</label>
         <input type="text" id="username" name="username" required><br>
@@ -28,20 +31,30 @@
         </div>
     </form>
     <div id="login-message"></div>
+
+    <!-- USER INFO BOX -->
     <div id="user-box-wrapper">
-    <div id="user-box">
-        <div id="left-side">
-            <div id="left-wrapper">
-                <div id="show-name"></div>
-                <div id="show-account"></div>
-                <div id="show-cred"></div>
-            </div>
-        </div>
-        <button id="deposit-button"><b>DEPOSIT</b></button>
-
+    <div class="user-info">
+        <div id="name"></div>
+        <div id="status"></div>
+        <div id="credit"></div>
+        <button id="deposit-button">Deposit Money</button>
     </div>
     </div>
 
+    <!-- DEPOSIT MONEY POPUP -->
+
+    <div id="popup">
+        <form>
+            <label for="number-input">Enter amount to add:</label>
+            <input type="number" id="number-input">
+            <button type="submit">Add to balance</button>
+        </form>
+    </div>
+
+
+
+    <!-- MENU & ORDER -->
     <div id="menu">
         <h2>Menu</h2>
     </div>
@@ -57,11 +70,16 @@
 </body>
 
 <script>
+    <!-- DATA VARIABLES FROM DATAFILES -->
     let users = DB.users;
     let transactions = DB.sold;
     let balances = DB.account;
 
+    let credentials_dict = {"0" : "Manager", "1" : "Bartender",
+                        "2" : "Waiter", "3" : "VIP Guest", "4" : "Guest"};
+
     let beers = allBeverages_type("Öl");
+    let wines = allBeverages_type("Vin");
 
 </script>
 
