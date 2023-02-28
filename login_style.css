@@ -135,6 +135,20 @@ input[type="submit"]:hover {
     height: 33%;
 }
 
+#select-category{
+    display: none;
+    flex-wrap: wrap;
+    margin: 5%;
+}
+.btn{
+    width: 100px;
+    height: 100px;
+    border: 1px solid #ccc;
+    padding: 2%;
+    border-radius: 5px;
+}
+
+
 /* Menu styles */
 #menu {
     display: none;

@@ -26,6 +26,7 @@ $(document).ready(function() {
         if (found){
             $('#login-message').text("Login successful!").removeClass('error').addClass('success').show();
             $('#login_form').hide();
+            $('#select-category').show();
             $('#menu').show();
             $('#order').show();
             let current_user = get_user_details(username)
@@ -39,6 +40,7 @@ $(document).ready(function() {
     $('#login_as_guest').click(function(){
         $('#login-message').text("Logged in as guest!").removeClass('error').addClass('success').show();
         $('#login_form').hide();
+        $('#select-category').show();
         $('#menu').show();
         $('#order').show();
     });
@@ -47,23 +49,33 @@ $(document).ready(function() {
     let menuDiv = $('#menu');
     let orderDiv = $('#order');
     let orderTotal = 0;
+    let optionDiv = $('#select-category');
 
 
+
+    let drink_types = [light_beers, dark_beers, white_wines, red_wines, spirits]
     // Load the menu
-    for (let beverage of beers) {
-        let menuItem = $('<div class="menu-item" draggable="true"></div>');
-        let itemName = $('<span class="item-name"></span>').text(beverage.namn);
-        let itemButton = $('<button class="item-button"></button>').text(beverage.prisinklmoms + ' SEK');
+    for(let drink_type of drink_types){
+
+        for (let beverage of drink_type) {
+            let menuItem = $('<div class="menu-item" draggable="true"></div>');
+            let itemName = $('<span class="item-name" style="width:200px;text-align: left"></span>').text(beverage.namn);
+            let typeName = $('<span class="item-type"></span>').text(beverage.varugrupp);
+            let itemButton = $('<button class="item-button"></button>').text(beverage.prisinklmoms + ' SEK');
 
 
-        menuItem.append(itemName);
-        menuItem.append(itemButton);
-        menuDiv.append(menuItem);
+            menuItem.append(itemName);
+            menuItem.append(typeName);
+            menuItem.append(itemButton);
+            menuDiv.append(menuItem);
 
-        itemButton.click(function (){
-            addToOrder(beverage);
-        });
+            itemButton.click(function () {
+                addToOrder(beverage);
+            });
+
+        }
     }
+
 
 
 

@@ -10,50 +10,86 @@
     <script src="Database/database_scripts.js"></script>
     <script src="Database/script_funcs.js"></script>
     <link rel="stylesheet" href="login_style.css">
+    <!--<link rel="stylesheet" href="main.css">-->
+
+    <!--
+        background from https://unsplash.com
+        icons from https://www.flaticon.com/
+    -->
 </head>
 
 
 
 
 <body>
-    <h1>Sailing under foreign flag</h1>
-    <form id="login_form">
-        <label for="username">Username:</label>
-        <input type="text" id="username" name="username" required><br>
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password"><br>
-        <div id="login_buttons">
-            <input type="submit" value="Login">
-            <button type="button" id="login_as_guest">Continue as Guest</button>
-        </div>
-    </form>
-    <div id="login-message"></div>
-    <div id="user-box-wrapper">
-    <div id="user-box">
-        <div id="left-side">
-            <div id="left-wrapper">
-                <div id="show-name"></div>
-                <div id="show-account"></div>
-                <div id="show-cred"></div>
+    <div class="foreground">
+        <h1>Sailing under a foreign flag</h1>
+        <form id="login_form">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required><br>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password"><br>
+            <div id="login_buttons">
+                <input type="submit" value="Login">
+                <button type="button" id="login_as_guest">Continue as Guest</button>
             </div>
+        </form>
+        <div id="login-message"></div>
+        <div id="user-box-wrapper">
+        <div id="user-box">
+            <div id="left-side">
+                <div id="left-wrapper">
+                    <div id="show-name"></div>
+                    <div id="show-account"></div>
+                    <div id="show-cred"></div>
+                </div>
+            </div>
+            <button id="deposit-button"><b>DEPOSIT</b></button>
+
         </div>
-        <button id="deposit-button"><b>DEPOSIT</b></button>
+        </div>
+
+        <div id="select-category">
+            <button class="btn">
+                <div class="btn_container">
+                    <img src="Media/beer_light.png" width="30" height="30" alt="light beer">
+                </div><span>Light beer</span>
+            </button>
+            <button class="btn">
+                <div class="btn_container">
+                    <img src="Media/beer_dark.png" width="30" height="30" alt="dark beer">
+                </div><span>Dark beer</span>
+            </button>
+            <button class="btn">
+                <div class="btn_container">
+                    <img src="Media/wine_light.png" width="30" height="30" alt="white wine">
+                </div><span>White wine</span>
+            </button>
+            <button class="btn">
+                <div class="btn_container">
+                    <img src="Media/wine_dark.png" width="30" height="30" alt="red wine">
+                </div><span>Red wine</span>
+            </button>
+            <button class="btn">
+                <div class="btn_container">
+                    <img src="Media/shotglass.png" width="30" height="30" alt="spirits">
+                </div><span>Spirits</span>
+            </button>
+        </div>
+
+        <div id="menu">
+            <h2>Menu</h2>
+        </div>
+
+        <div id="order">
+            <h2>Current Order</h2>
+        </div>
+
+        <div id="order-total">
+
+        </div>
 
     </div>
-    </div>
-
-    <div id="menu">
-        <h2>Menu</h2>
-    </div>
-
-    <div id="order">
-        <h2>Current Order</h2>
-    </div>
-
-    <div id="order-total">
-
-    </div>
-
 </body>
 
 <script>
@@ -62,6 +98,11 @@
     let balances = DB.account;
 
     let beers = allBeverages_type("Öl");
+    let light_beers = allBeverages_type("Öl, Ljus lager");
+    let dark_beers = allBeverages_type("Öl, Porter och Stout");
+    let white_wines = allBeverages_type("Vitt vin");
+    let red_wines = allBeverages_type("Rött vin");
+    let spirits = allBeverages_type("Okryddad sprit");
 
 </script>
 
