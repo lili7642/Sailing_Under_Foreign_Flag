@@ -17,7 +17,7 @@
 
 <body>
     <!-- TITLE -->
-    <h1>Sailing under foreign flag</h1>
+    <h1 style="color: white">Sailing under foreign flag</h1>
 
     <!-- LOGIN PAGE -->
     <form id="login_form">
@@ -36,9 +36,11 @@
     <div id="user-box-wrapper">
     <div class="user-info">
         <div id="name"></div>
-        <div id="status"></div>
-        <div id="credit"></div>
-        <button id="deposit-button">Deposit Money</button>
+        <div id="user-info-wrapper">
+            <span id="status"></span>
+            <span id="credit"></span>
+            <button id="deposit-button">Deposit Money</button>
+        </div>
     </div>
     </div>
 
@@ -55,21 +57,39 @@
 
 
     <!-- MENU & ORDER -->
+
     <div id="menu">
-        <h2>Menu</h2>
+        <h2 style="color: white">Menu</h2>
+        <div id="menu-item-wrapper"></div>
     </div>
 
     <div id="order">
-        <h2>Current Order</h2>
+        <h2 style="color: white">Current Order</h2>
+        <div id="order-item-wrapper">
+
+        </div>
+        <div id="order-total-wrapper">
+            <button id="order-button">Place order</button>
+            <span id="order-total"></span>
+        </div>
     </div>
 
-    <div id="order-total">
+
+
+    <!-- INFO POPUP -->
+    <div id="info-popup">
 
     </div>
 
 </body>
 
 <script>
+    <!-- GLOBAL VARIABLES -->
+    let orderTotal;
+    let order = {};
+    let current_balance;
+    let current_user;
+
     <!-- DATA VARIABLES FROM DATAFILES -->
     let users = DB.users;
     let transactions = DB.sold;

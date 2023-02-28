@@ -5,10 +5,6 @@ $(document).ready(function() {
     //prefill form as default
     $('#username').val('jorass');
     $('#password').val('b690bc2447d40ea8a6f78345eb979a28');
-
-    let current_user;
-    let current_balance;
-
     $('#login_form').submit(function(e) {
         e.preventDefault();
         let username = $('#username').val();
@@ -26,15 +22,24 @@ $(document).ready(function() {
         }
 
         if (found){
-            $('#login-message').text("Login successful!").removeClass('error').addClass('success').show();
+            $('#login-message').text("Login successful!").removeClass('error').addClass('success').show().fadeOut(3000);
             $('#login-message').click(function(){$(this).hide()});
             $('#login_form').hide();
             $('#menu').show();
-            $('#order').show();
+
+            // UPDATE LOGGED IN USER
             current_user = get_user_details(username)
             current_balance = get_balance(current_user);
+
+            //LOAD USER INFO DIV
             load_user_box(current_user);
+
+            //LOAD ORDER DIV
+            orderTotal = 0;
+            $('#order').show();
+            $('#order-total').text('Total: ' + orderTotal.toFixed(2) + ' SEK');
         }else{
+            //DONT LOAD PAGE, LOGIN FAILED
             $('#login-message').text('Invalid username or password.').removeClass('success').addClass('error').show();
         }
 
@@ -42,10 +47,12 @@ $(document).ready(function() {
 
     // LOGIN AS GUEST
     $('#login_as_guest').click(function(){
-        $('#login-message').text("Logged in as guest!").removeClass('error').addClass('success').show();
+
+        //LOAD WEBPAGE IN GUEST MODE, NO ORDERING OR CREDIT
+        $('#login-message').text("Logged in as guest!").removeClass('error').addClass('success').show().fadeOut(3000);
         $('#login_form').hide();
         $('#menu').show();
-        $('#order').show();
+        $('#menu-item-wrapper').css("height","100%");
     });
 
 
@@ -71,61 +78,38 @@ $(document).ready(function() {
     });
 
 
-
-    let menuDiv = $('#menu');
-    let orderDiv = $('#order');
-    let orderTotal = 0;
-
-
     // Load the menu
+    let menuDiv = $('#menu-item-wrapper');
     for (let beverage of beers) {
         let menuItem = $('<div class="menu-item" draggable="true"></div>');
         let itemName = $('<span class="item-name"></span>').text(beverage.namn);
+        let infoButton = $('<span class="info-button"></span>').html(' &#9432');
         let itemButton = $('<button class="item-button"></button>').text(beverage.prisinklmoms + ' SEK');
 
+        let someWrapper = $('<div></div>');
+        someWrapper.append(itemName);
+        someWrapper.append(infoButton);
 
-        menuItem.append(itemName);
+
+        menuItem.append(someWrapper);
         menuItem.append(itemButton);
         menuDiv.append(menuItem);
 
         itemButton.click(function (){
-            addToOrder(beverage);
+            add_to_order(beverage);
+        });
+
+        infoButton.click(function () {
+            show_info_popup(beverage);
         });
     }
 
-
-
-    let order = {};
-    function addToOrder(beverage) {
-        let orderItem = $('<div class="order-item"></div>');
-        let itemName = $('<span class="item-name"></span>').text(beverage.namn);
-        let itemPrice = $('<span class="item-price"></span>').text(beverage.prisinklmoms + ' SEK');
+$('#order-button').click(function (){
+    place_order();
+});
 
 
 
-        // row below is CHAT GPT magic
-        let existingItem = orderDiv.find('.item-name:contains("'+beverage.namn+'")').first().parent('.order-item');
-
-        if (beverage.namn in order){
-            order[beverage.namn] += 1;
-            existingItem.find('.item-name').text(beverage.namn + " x" + order[beverage.namn]);
-            existingItem.find('.item-price').text(beverage.prisinklmoms);
-
-        }else{
-            order[beverage.namn] = 1;
-            orderItem.append(itemName);
-            orderItem.append(itemPrice);
 
 
-            orderDiv.append(orderItem);
-        }
-        orderTotal += parseFloat(beverage.prisinklmoms);
-        $('#order-total').text('Total: ' + orderTotal.toFixed(2) + ' SEK');
-
-    }
-
-
-    $(function(){
-        orderDiv.droppable();
-    });
 });
