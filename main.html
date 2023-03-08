@@ -9,6 +9,7 @@
     <script src="script.js"></script>
     <script src="Database/database_scripts.js"></script>
     <script src="Database/script_funcs.js"></script>
+    <script src="Database/draganddrop.js"></script>
     <link rel="stylesheet" href="login_style.css">
 </head>
 
@@ -100,7 +101,7 @@
 
     <div id="order">
         <h2 style="color: white">Current Order</h2>
-        <div id="order-item-wrapper">
+        <div id="order-item-wrapper" ondrop="drop(event)" ondragover="allowDrop(event)">
             <p id="empty-order-message" style="color: gray;">Your order is empty</p>
         </div>
         <div id="order-total-wrapper">

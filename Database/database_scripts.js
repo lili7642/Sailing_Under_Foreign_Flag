@@ -14,6 +14,15 @@ function allBeverages_type(type) {
     return collector;
 }
 
+function beverageById(id){
+    for (i = 0; i < DB2.spirits.length; i++) {
+        if(DB2.spirits[i].artikelid === id){
+            return DB2.spirits[i];
+        }
+    }
+
+}
+
 function get_user_details(userName) {
     let userCollect = {};
     let userID;

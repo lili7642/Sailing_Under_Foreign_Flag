@@ -236,7 +236,7 @@ function load_beverages(divToLoad, bevList){
     let menuDiv = $(divToLoad);
     for (let beverage of bevList) {
         // LOAD THE DIVS
-        let menuItem = $('<div class="menu-item" draggable="true"></div>');
+        let menuItem = $('<div class="menu-item" id="'+ beverage.artikelid +'-menuitem" draggable="true" ondragstart="drag(event)"></div>');
         let itemName = $('<span class="item-name"></span>').text(beverage.namn);
         let infoButton = $('<span class="info-button"></span>').html(' &#9432');
         let itemButton = $('<button class="item-button"></button>').text(beverage.prisinklmoms + ' SEK');
