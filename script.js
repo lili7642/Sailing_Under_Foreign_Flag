@@ -15,8 +15,22 @@ $(function() {
         show_deposit_popup();
     });
 
+    // CATEGORY BUTTONS ------------------------------------------------------------------
+    let categoryButtons = $('.menu-category');
+    categoryButtons.on("click", function(){
+        choose_category_function(this.id);
+    });
+
 
     // LOAD THE MENU ---------------------------------------------------------------------
     load_all_beverages();
+    // start with beer showing
     $('#beer-menu').show();
+
+    categoryButtons.css("background-color", "lightgrey").css("border-bottom", "2px solid #ccc");
+    $('#beer-category').css("border-bottom",  "none").css("background-color", "#f2f2f2");
+
+
+
+
 });

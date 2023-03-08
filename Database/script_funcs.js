@@ -18,6 +18,8 @@ function show_login_popup(){
 
             //LOAD USER INFO DIV
             load_user_box(current_user);
+            // make menu set height to make room for order basket
+            $('.menu-item-wrapper').css("height", "330px");
 
             //LOAD ORDER DIV
             orderTotal = 0;
@@ -69,6 +71,8 @@ function logout_function(){
     $('.comment').remove();
     $('#empty-order-message').show().text("Thank you for your order!");
 
+    $('.menu-item-wrapper').css("height", "100%");
+
 }
 
 function load_user_box(user_info){
@@ -119,11 +123,12 @@ function show_info_popup(beverage){
         .attr("onclick", "style='display: none;'"); // on click the box disappears
 }
 
-//  ------ For some reason it changes every comment ??
-function add_comment(beverage, orderItem){
+
+function add_comment(beverage, commentDiv){
+
     let comment;
     // clear input field
-    $('#comment-input').val($('#' + beverage.artikelid + '-comment').text());
+    $('#comment-input').val(commentDiv.text());
 
     //show relevant popup
     $('#comment-popup label').text('Add comment to '+beverage.namn + ':');
@@ -133,18 +138,24 @@ function add_comment(beverage, orderItem){
         }
     });
     // take input from comment field
-    $('#comment-popup form').submit(function (e){
-        e.preventDefault();
+    $('#comment-submit').on("click", function (){
         comment = $('#comment-input').val();
         // add comment div in order
-        $('#' + beverage.artikelid + '-comment').text(comment).show();
-    });
+        commentDiv.text(comment).show();
 
+        $(this).off("click"); // without this each comment button changes every comment
+                                    // a new function is attached to the submit comment button
+                                    // every time we comment
+    });
 }
 
 
-
 function add_to_order(beverage) {
+    if(!current_user){
+        alert("log in to order");
+        return;
+    }
+
     // IF BEVERAGE ALREADY IN ORDER, CHANGE THE DIV INSTEAD OF ADDING
     if (beverage.namn in order){
         order[beverage.namn] += 1;
@@ -183,9 +194,9 @@ function add_to_order(beverage) {
         orderDiv.append(someComment);
 
         // COMMENT BUTTON FUNCTIONALITY
-        commentButton.click(function (){
-            add_comment(beverage, orderItem);
-        })
+        commentButton.on("click", function(){
+            add_comment(beverage, someComment);
+        });
     }
     // UPDATE ORDER TOTAL
     orderTotal += parseFloat(beverage.prisinklmoms);
@@ -218,6 +229,7 @@ function place_order(){
 function load_all_beverages(){
     load_beverages("#beer-menu", beers);
     load_beverages("#wine-menu", wines);
+    load_beverages("#spirit-menu", spirits);
 }
 
 function load_beverages(divToLoad, bevList){
@@ -248,4 +260,24 @@ function load_beverages(divToLoad, bevList){
     });
 }
 
+function show_menu(type){
+    $('.menu-item-wrapper').hide();
+    $('#' + type).show();
+}
+
+function choose_category_function(divId){
+    let thisDiv = $('#'+divId);
+    let otherDivs = $('.menu-category');
+
+    otherDivs.css("background-color", "lightgrey").css("border-bottom", "2px solid #ccc");
+    thisDiv.css("border-bottom",  "none").css("background-color", "#f2f2f2");
+
+    if(divId === "beer-category"){
+        show_menu('beer-menu');
+    }else if(divId === "wine-category"){
+        show_menu('wine-menu');
+    }else if(divId === "spirit-category"){
+        show_menu('spirit-menu');
+    }
+}
 

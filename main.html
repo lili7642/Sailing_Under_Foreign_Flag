@@ -78,8 +78,24 @@
 
     <div id="menu">
         <h2 style="color: white">Menu</h2>
+        <div id="menu-categories">
+            <div class="menu-category" id="beer-category">
+                &#127866;
+            </div>
+            <div class="menu-category" id="wine-category">
+                &#127863;
+            </div>
+            <div class="menu-category" id="spirit-category">
+                &#127864;
+            </div>
+            <div class="menu-category" id="other-category">
+                &#127922;
+            </div>
+        </div>
+
         <div class="menu-item-wrapper" id="beer-menu"></div>
         <div class="menu-item-wrapper" id="wine-menu"></div>
+        <div class="menu-item-wrapper" id="spirit-menu"></div>
     </div>
 
     <div id="order">
@@ -98,7 +114,7 @@
         <form>
             <label for="comment-input">Label</label>
             <input type="text" id="comment-input">
-            <button type="submit">Add comment</button>
+            <button type="button" id="comment-submit">Add comment</button>
         </form>
     </div>
 
@@ -127,6 +143,7 @@
 
     let beers = allBeverages_type("Öl");
     let wines = allBeverages_type("vin");
+    let spirits = allBeverages_type('sprit');
 
 </script>
 
