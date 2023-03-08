@@ -14,6 +14,7 @@ h1{
 }
 
 form {
+    /*STYLE FROM CHAT GPT*/
     background-color: #fff;
     border-radius: 10px;
     border: 3px solid #ccc;
@@ -21,12 +22,44 @@ form {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
     max-width: 400px;
     margin: 0 auto;
+    flex-direction: column;
+    align-items: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 50%;
+    height: auto;
 }
 
 label {
     display: block;
     margin-bottom: 10px;
     font-weight: bold;
+}
+
+button {
+    background-color: #4CAF50;
+}
+button:hover{
+    background-color: #3e8e41;
+}
+
+#not-logged-in-wrapper{
+    display: flex;
+    justify-content: space-between;
+}
+
+/* LOGIN POPUP */
+#login-popup{
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: 9999;
 }
 
 #login_buttons{
@@ -46,21 +79,15 @@ input[type="text"], input[type="password"] {
     box-sizing: border-box;
 }
 
-input[type="submit"] {
-    background-color: #4CAF50;
+#login-button{
     color: #fff;
     padding: 10px 20px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-}
-
-input[type="submit"]:hover {
-    background-color: #3e8e41;
 }
 
 #login_as_guest {
-    background-color: #4CAF50;
     color: #fff;
     padding: 10px 20px;
     border: none;
@@ -68,12 +95,8 @@ input[type="submit"]:hover {
     cursor: pointer;
 }
 
-#login_as_guest:hover {
-    background-color: #3e8e41;
-}
-
 #login-message {
-    margin: 5%;
+    margin-top: 5%;
     padding: 10px;
     background-color: #f2dede;
     color: #a94442;
@@ -82,25 +105,15 @@ input[type="submit"]:hover {
     display: none;
 }
 
-
-#login-message.success {
-    background-color: #dff0d8;
-    color: #3c763d;
-    border: 3px solid #3c763d;
-    position: absolute;
-    display: flex;
-    width: 75%;
-    top: -41px;
-    z-index: 9999;
-    text-align: center;
-
+#show-login-popup-button{
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
 }
+
 #user-box-wrapper{
-    display: none;
-}
-
-
-.user-info {
     background-color: #f2f2f2;
     border: 3px solid #ccc;
     border-radius: 5px;
@@ -109,44 +122,75 @@ input[type="submit"]:hover {
     line-height: 30px;
     margin-left: 5%;
     margin-right: 5%;
+}
+
+#user-info {
+    display: none;
 
 }
+
 #user-info-wrapper{
-    justify-content: space-between;
     display: flex;
-    margin-right: 0;
+    justify-content: space-between;
+}
+
+#user-info-text-wrapper{
+    text-align: left;
+}
+
+#user-info-button-wrapper{
+    width: 20%;
 }
 
 #name {
-    margin-bottom: 2%;
-    font-size: 24px;
+    font-size: 18px;
 }
 
 #credit {
     font-size: 18px;
-    margin-bottom: 10px;
+    margin-top:10%;
 }
 
 #status {
     font-size: 18px;
-    margin-bottom: 10px;
+
 
 }
 
 #deposit-button {
+    margin-bottom: 5%;
     background-color: #4CAF50;
     border: none;
     color: white;
     padding: 10px;
     text-align: center;
     text-decoration: none;
-    font-size: 16px;
+    font-size: 12px;
     cursor: pointer;
     border-radius: 5px;
+    width: 100%;
 }
 
 #deposit-button:hover {
     background-color: #3e8e41;
+}
+
+#logout-button {
+    display: block;
+    background-color: #cc504a;
+    border: none;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 12px;
+    cursor: pointer;
+    border-radius: 5px;
+    width: 100%;
+}
+
+#logout-button:hover {
+    background-color: #a94442;
 }
 
 /* DEPOSIT POPUP */
@@ -163,18 +207,7 @@ input[type="submit"]:hover {
 
 #popup form {
     display: flex;
-    flex-direction: column;
-    justify-content: center;
     align-items: center;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 50%;
-    height: auto;
-    padding: 20px;
-    background-color: #fff;
-    border-radius: 5px;
 }
 
 #popup label {
@@ -192,8 +225,6 @@ input[type="submit"]:hover {
 }
 
 #popup button[type="submit"] {
-    background-color: #4CAF50;
-    border: none;
     color: white;
     padding: 10px;
     text-align: center;
@@ -205,16 +236,14 @@ input[type="submit"]:hover {
     transition: background-color 0.3s ease;
 }
 
-#popup button[type="submit"]:hover {
-    background-color: #3e8e41;
-}
+
 
 
 
 /* Menu styles */
 #menu {
 
-    display: none;
+    /*display: none;*/
     flex-wrap: wrap;
     justify-content: center;
     margin: 5%;
@@ -223,7 +252,8 @@ input[type="submit"]:hover {
 #menu-item-wrapper{
     background-color: #f2f2f2;
     overflow-y: auto;
-    height: 330px;
+    /*height: 330px;*/
+    height: 100%;
     border: 3px solid #ccc;
     border-radius: 10px;
 }

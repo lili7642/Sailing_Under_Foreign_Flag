@@ -2,86 +2,19 @@
 
 $(document).ready(function() {
 
-    //PREFILL THE FORM FOR TESTING
-    $('#username').val('jorass');
-    $('#password').val('b690bc2447d40ea8a6f78345eb979a28');
 
-    $('#login_form').submit(function(e) {
-        e.preventDefault();
-        let username = $('#username').val();
-        let password = $('#password').val();
-
-        // CHECK LOGIN BY LOOPING THROUGH ALL STORED USERNAMES AND PASSWORDS
-        let found = false;
-        let firstname, lastname;
-        for (let user of users) {
-            if(user.username === username && user.password === password){
-                found = true;
-                firstname = user.first_name;
-                lastname = user.last_name;
-            }
-        }
-
-        if (found){
-            // SHOW LOGIN MESSAGE AND HIDE THE LOGIN WINDOW
-            // LOGIN MESSAGE WILL FADE OUT OR DISAPPEAR IF CLICKED
-            $('#login-message').text("Login successful!")
-                .removeClass('error').addClass('success')  // change class of message
-                .show().fadeOut(5000)                            // fadeout after 5s
-                .click(function(){$(this).hide()});              //click to hide
-            $('#login_form').hide();
-            $('#menu').show();
-
-            // UPDATE LOGGED IN USER
-            current_user = get_user_details(username)
-            current_balance = get_balance(current_user);
-
-            //LOAD USER INFO DIV
-            load_user_box(current_user);
-
-            //LOAD ORDER DIV
-            orderTotal = 0;
-            $('#order').show();
-            $('#order-total').text('Total: ' + orderTotal.toFixed(2) + ' SEK');
-        }else{
-            //DONT LOAD PAGE, LOGIN FAILED
-            $('#login-message').text('Invalid username or password.').removeClass('success').addClass('error').show();
-        }
-
+    // LOGIN FUNCTION -------------------------------------------------------------------
+    $('#show-login-popup-button').on("click",function (){
+        // SHOW THE LOGIN POPUP FORM
+        $('#login-popup').show();
+        show_login_popup();
     });
 
-    // LOGIN AS GUEST
-    $('#login_as_guest').click(function(){
-
-        //LOAD WEBPAGE IN GUEST MODE, NO ORDERING OR CREDIT
-        $('#login-message').text("Logged in as guest!").removeClass('error').addClass('success').show().fadeOut(3000);
-        $('#login_form').hide();
-        $('#menu').show();
-        $('#menu-item-wrapper').css("height","100%");
-    });
-
-    // BUTTON FOR DEPOSITING MONEY
-    $('#deposit-button').click(function (){
-        // SHOW THE POPUP FORM
+    // BUTTON FOR DEPOSITING MONEY ------------------------------------------------------
+    $('#deposit-button').on("click",function (){
+        // SHOW THE DEPOSIT POPUP FORM
         $('#popup').show();
-    });
-
-    // READ MONEY TO DEPOSIT
-    $('#popup form').submit(function (e){
-        e.preventDefault();
-        let deposit_amount = $('#number-input').val();
-        // fake balance, resets on reload !
-        // UPDATE BALANCE AND DIV
-        current_balance = (Number(current_balance) + Number(deposit_amount)).toString();
-        $('#credit').html("<b>Balance: </b>" + current_balance + " SEK");
-        $('#popup').hide();
-    });
-
-    $('#popup').click(function(e) {
-        // IF YOU CLICK OUTSIDE THE POPUP IT WILL CLOSE
-        if ($(e.target).attr('id') === 'popup') {
-            $('#popup').hide();
-        }
+        show_deposit_popup();
     });
 
 

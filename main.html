@@ -19,29 +19,47 @@
     <!-- TITLE -->
     <h1 style="color: white">Sailing under foreign flag</h1>
 
-    <!-- LOGIN PAGE -->
-    <form id="login_form">
-        <label for="username">Username:</label>
-        <input type="text" id="username" name="username" required><br>
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password"><br>
-        <div id="login_buttons">
-            <input type="submit" value="Login">
-            <button type="button" id="login_as_guest">Continue as Guest</button>
-        </div>
-    </form>
-    <div id="login-message"></div>
+    <!-- POPUP FOR LOGGING IN-->
+    <div id="login-popup">
+        <form id="login_form">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required><br>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password"><br>
+            <div id="login_buttons">
+                <!--<input type="submit" value="Login">-->
+                <button type="button" id="login-button">Login</button>
+                <button type="button" id="login_as_guest">Continue as Guest</button>
+            </div>
+            <div id="login-message"></div>
+        </form>
+    </div>
 
     <!-- USER INFO BOX -->
     <div id="user-box-wrapper">
-    <div class="user-info">
-        <div id="name"></div>
-        <div id="user-info-wrapper">
-            <span id="status"></span>
-            <span id="credit"></span>
-            <button id="deposit-button">Deposit Money</button>
+
+        <!-- FIRST NOT LOGGED IN  -->
+        <div id="not-logged-in-wrapper">
+            <span id="guest-mode-text"><b>You are in guest mode.</b></span>
+            <button id="show-login-popup-button">Press to log in</button>
         </div>
-    </div>
+
+        <!-- THEN USER INFO-->
+        <div id="user-info">
+            <div id="user-info-wrapper">
+                <span id="user-info-text-wrapper">
+                    <span id="name"></span>
+                    <span id="status"></span>
+                    <div id="credit"></div>
+                </span>
+
+                <span id="user-info-button-wrapper">
+                    <button id="deposit-button">Deposit Money</button>
+                    <button id="logout-button" onclick="logout_function()">Logout</button>
+                </span>
+            </div>
+        </div>
+
     </div>
 
     <!-- DEPOSIT MONEY POPUP -->
