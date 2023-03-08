@@ -249,7 +249,7 @@ input[type="text"], input[type="password"] {
     margin: 5%;
 }
 
-#menu-item-wrapper{
+.menu-item-wrapper{
     background-color: #f2f2f2;
     overflow-y: auto;
     /*height: 330px;*/

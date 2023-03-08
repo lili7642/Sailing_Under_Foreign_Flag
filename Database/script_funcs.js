@@ -140,9 +140,6 @@ function add_comment(beverage, orderItem){
         $('#' + beverage.artikelid + '-comment').text(comment).show();
     });
 
-
-
-
 }
 
 
@@ -216,9 +213,39 @@ function place_order(){
         current_balance -= temp_total;
         $('#credit').html("<b>Balance: </b>" + current_balance.toFixed(2) + " SEK");
     }
-
-
-
-
-
 }
+
+function load_all_beverages(){
+    load_beverages("#beer-menu", beers);
+    load_beverages("#wine-menu", wines);
+}
+
+function load_beverages(divToLoad, bevList){
+    let menuDiv = $(divToLoad);
+    for (let beverage of bevList) {
+        // LOAD THE DIVS
+        let menuItem = $('<div class="menu-item" draggable="true"></div>');
+        let itemName = $('<span class="item-name"></span>').text(beverage.namn);
+        let infoButton = $('<span class="info-button"></span>').html(' &#9432');
+        let itemButton = $('<button class="item-button"></button>').text(beverage.prisinklmoms + ' SEK');
+        let someWrapper = $('<div></div>');
+
+        // STACK THEM
+        someWrapper.append(itemName);
+        someWrapper.append(infoButton);
+        menuItem.append(someWrapper);
+        menuItem.append(itemButton);
+        menuDiv.append(menuItem).hide();
+
+        // ADD CLICK FUNCTIONS TO ORDER BUTTON AND INFO BUTTON
+        itemButton.click(function (){add_to_order(beverage);});
+        infoButton.click(function () {show_info_popup(beverage);});
+    }
+
+    // ADD CLICK FUNCTION TO ORDER BUTTON
+    $('#order-button').on("click",function (){
+        place_order();
+    });
+}
+
+
