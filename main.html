@@ -10,6 +10,7 @@
     <script src="Database/database_scripts.js"></script>
     <script src="Database/script_funcs.js"></script>
     <script src="Database/draganddrop.js"></script>
+    <script src="Database/language_script.js"></script>
     <link rel="stylesheet" href="login_style.css">
 </head>
 
@@ -20,15 +21,23 @@
     <!-- TITLE -->
     <h1 style="color: white">Sailing under foreign flag</h1>
 
+    <div id="language-button-container">
+        <div id="language-button-wrapper">
+            <button class="language-button" id="swedish-button" onclick="change_lang('sv')"><b>SWE</b></button>
+            <button class="language-button" id="english-button" onclick="change_lang('en')"><b>ENG</b></button>
+            <button class="language-button" id="turkish-button" onclick="change_lang('en')"><b>TUR</b></button>
+            <button class="language-button" id="german-button" onclick="change_lang('en')"><b>GER</b></button>
+        </div>
+    </div>
+
     <!-- POPUP FOR LOGGING IN-->
     <div id="login-popup">
         <form id="login_form">
-            <label for="username">Username:</label>
+            <label for="username" id="username-label">Username:</label>
             <input type="text" id="username" name="username" required><br>
-            <label for="password">Password:</label>
+            <label for="password" id="password-label">Password:</label>
             <input type="password" id="password" name="password"><br>
             <div id="login_buttons">
-                <!--<input type="submit" value="Login">-->
                 <button type="button" id="login-button">Login</button>
                 <button type="button" id="login_as_guest">Continue as Guest</button>
             </div>
@@ -51,7 +60,10 @@
                 <span id="user-info-text-wrapper">
                     <span id="name"></span>
                     <span id="status"></span>
-                    <div id="credit"></div>
+                    <div class="credit" id="credit-wrapper">
+                        <span id="credit-label" style="font-weight: bold;">Balance: </span>
+                        <span id="credit-number">999</span>
+                    </div>
                 </span>
 
                 <span id="user-info-button-wrapper">
@@ -67,9 +79,9 @@
 
     <div id="popup">
         <form>
-            <label for="number-input">Enter amount to add:</label>
+            <label for="number-input" id="deposit-popup-label">Enter amount to add:</label>
             <input type="number" id="number-input">
-            <button type="submit">Add to balance</button>
+            <button type="submit" id="deposit-popup-button">Add to balance</button>
         </form>
     </div>
 
@@ -78,7 +90,7 @@
     <!-- MENU & ORDER -->
 
     <div id="menu">
-        <h2 style="color: white">Menu</h2>
+        <h2 style="color: white" id="menu-header">Menu</h2>
         <div id="menu-categories">
             <div class="menu-category" id="beer-category">
                 &#127866;
@@ -100,20 +112,24 @@
     </div>
 
     <div id="order">
-        <h2 style="color: white">Current Order</h2>
+        <h2 style="color: white" id="current-order-label">Current Order</h2>
         <div id="order-item-wrapper" ondrop="drop(event)" ondragover="allowDrop(event)">
-            <p id="empty-order-message" style="color: gray;">Your order is empty</p>
+            <p id="empty-order-message" style="color: gray; cursor: default;">Your order is empty</p>
+            <p id="thank-you-order-message" style="color: gray; cursor: default; display: none">Thank you for your order</p>
         </div>
         <div id="order-total-wrapper">
             <button id="order-button">Place order</button>
-            <span id="order-total"></span>
+            <span>
+                <span id="order-total-label">Total: </span>
+                <span id="order-total-number">999</span>
+            </span>
         </div>
     </div>
 
     <!-- COMMENT POPUP-->
     <div id="comment-popup">
         <form>
-            <label for="comment-input">Label</label>
+            <label for="comment-input" id="comment-popup-label">Add comment to </label>
             <input type="text" id="comment-input">
             <button type="button" id="comment-submit">Add comment</button>
         </form>
@@ -133,6 +149,8 @@
     let order = {};
     let current_balance;
     let current_user;
+
+
 
     <!-- DATA VARIABLES FROM DATAFILES -->
     let users = DB.users;

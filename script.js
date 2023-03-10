@@ -1,6 +1,9 @@
 
 
 $(function() {
+
+    update_view();
+
     // LOGIN FUNCTION -------------------------------------------------------------------
     $('#show-login-popup-button').on("click",function (){
         // SHOW THE LOGIN POPUP FORM

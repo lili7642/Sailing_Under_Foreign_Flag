@@ -4,6 +4,13 @@ function show_login_popup(){
     $('#username').val('jorass');
     $('#password').val('b690bc2447d40ea8a6f78345eb979a28');
 
+    $('#login-popup').click(function(e) {
+        // IF YOU CLICK OUTSIDE THE POPUP IT WILL CLOSE
+        if ($(e.target).attr('id') === 'login-popup') {
+            $('#login-popup').hide();
+        }
+    });
+
     // LOGIN AS USER
     $('#login-button').on("click",function(e) {
         e.preventDefault();
@@ -25,7 +32,7 @@ function show_login_popup(){
             orderTotal = 0;
             $('#menu-item-wrapper').css("height","330px");
             $('#order').show();
-            $('#order-total').text('Total: ' + orderTotal.toFixed(2) + ' SEK');
+            update_total();
         }else{
             //DONT LOAD PAGE, LOGIN FAILED
             $('#login-message').text('Invalid username or password.').removeClass('success').addClass('error').show();
@@ -69,7 +76,8 @@ function logout_function(){
     // clear basket
     $('.order-item').remove();
     $('.comment').remove();
-    $('#empty-order-message').show().text("Thank you for your order!");
+    $('#empty-order-message').show();
+    $('#thank-you-order-message').hide();
 
     $('.menu-item-wrapper').css("height", "100%");
 
@@ -81,7 +89,7 @@ function load_user_box(user_info){
     $('#user-info').show();
     $('#name').html("<b>" + user_info.first_name + " " + user_info.last_name + ", </b>");
     $('#status').html(credentials_dict[user_info.credentials]);
-    $('#credit').html("<b>Balance: </b>" + get_balance(user_info) + " SEK");
+    $('#credit-number').text(get_balance(user_info) + " SEK");
 
     if(user_info.credentials < 4){
         $('#deposit-button').show();
@@ -97,7 +105,7 @@ function show_deposit_popup(){
         // fake balance, resets on reload !
         // UPDATE BALANCE AND DIV
         current_balance = (Number(current_balance) + Number(deposit_amount)).toString();
-        $('#credit').html("<b>Balance: </b>" + current_balance + " SEK");
+        $('#credit-number').text(current_balance + " SEK");
         $('#popup').hide();
     });
 
@@ -131,10 +139,13 @@ function add_comment(beverage, commentDiv){
     $('#comment-input').val(commentDiv.text());
 
     //show relevant popup
-    $('#comment-popup label').text('Add comment to '+beverage.namn + ':');
+    let label = $('#comment-popup-label');
+    label.text(label.text() + beverage.namn + ':');
+
     $('#comment-popup').show().click(function (e){
         if($(e.target).attr("id") !== "comment-input"){
             $(this).hide();
+            $('#comment-submit').off("click");
         }
     });
     // take input from comment field
@@ -169,6 +180,7 @@ function add_to_order(beverage) {
 
         // hide this message since order no longer empty
         $('#empty-order-message').hide();
+        $('#thank-you-order-message').hide();
 
         // relevant divs
         let orderDiv = $('#order-item-wrapper');
@@ -200,8 +212,12 @@ function add_to_order(beverage) {
     }
     // UPDATE ORDER TOTAL
     orderTotal += parseFloat(beverage.prisinklmoms);
-    $('#order-total').text('Total: ' + orderTotal.toFixed(2) + ' SEK');
+    update_total();
 
+}
+
+function update_total(){
+    $('#order-total-number').text(orderTotal.toFixed(2) + ' SEK');
 }
 
 function place_order(){
@@ -209,13 +225,13 @@ function place_order(){
     let temp_total = orderTotal;
     orderTotal = 0;
     order = {};
-    $('#order-total').text('Total: ' + orderTotal.toFixed(2) + ' SEK');
+    update_total();
 
     // REMOVE ITEMS FROM BASKET
     $('.order-item').remove();
     $('.comment').remove();
     // SHOW MESSAGE THAT BASKET IS EMPTY
-    $('#empty-order-message').show().text("Thank you for your order!");
+    $('#thank-you-order-message').show();
 
 
 
