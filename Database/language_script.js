@@ -81,7 +81,51 @@ dict = {
         'order-total-label' : 'Summa: ', //Include space at the end
         'comment-popup-label' : 'Lägg till kommentar för ', //Include space at the end
         'comment-submit' : 'Lägg till kommentar'
-    }
+    },
+    // FILL WITH TURKISH TRANSLATION
+    'tr': {
+        'guest-mode-text' : "You are in guest mode.",
+        'show-login-popup-button': "Press to login",
+        'menu-header' : 'Menu',
+        'username-label' : 'Username:',
+        'password-label' : 'Password:',
+        'login-button' : 'Login',
+        'login_as_guest' : 'Continue as guest',
+        'credit-label' : 'Balance: ', //Include space at the end
+        'deposit-button' : 'Deposit money',
+        'logout-button' : 'Logout',
+        'deposit-popup-label' : 'Enter amount to add:',
+        'deposit-popup-button' : 'Add to balance',
+        'current-order-label' : 'Current Order',
+        'empty-order-message' : 'Your order is empty',
+        'thank-you-order-message' : 'Thank you for your order',
+        'order-button' : 'Place order',
+        'order-total-label' : 'Total: ', //Include space at the end
+        'comment-popup-label' : 'Add comment to ', //Include space at the end
+        'comment-submit' : 'Add comment'
+    },
+    // FILL WITH GERMAN TRANSLATION
+    'de': {
+        'guest-mode-text' : "You are in guest mode.",
+        'show-login-popup-button': "Press to login",
+        'menu-header' : 'Menu',
+        'username-label' : 'Username:',
+        'password-label' : 'Password:',
+        'login-button' : 'Login',
+        'login_as_guest' : 'Continue as guest',
+        'credit-label' : 'Balance: ', //Include space at the end
+        'deposit-button' : 'Deposit money',
+        'logout-button' : 'Logout',
+        'deposit-popup-label' : 'Enter amount to add:',
+        'deposit-popup-button' : 'Add to balance',
+        'current-order-label' : 'Current Order',
+        'empty-order-message' : 'Your order is empty',
+        'thank-you-order-message' : 'Thank you for your order',
+        'order-button' : 'Place order',
+        'order-total-label' : 'Total: ', //Include space at the end
+        'comment-popup-label' : 'Add comment to ', //Include space at the end
+        'comment-submit' : 'Add comment'
+    },
 }
 
 // This function will return the appropriate string for each
