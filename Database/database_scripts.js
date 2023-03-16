@@ -48,6 +48,8 @@ function get_user_details(userName) {
     return userCollect;
 }
 
+
+
 function get_balance(userinfo){
     let account;
     for (let i = 0; i < DB.account.length; i++) {

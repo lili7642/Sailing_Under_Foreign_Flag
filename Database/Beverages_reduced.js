@@ -22,6 +22,7 @@ var DB2 = {
             "provadargang": "",
             "alkoholhalt": "13%",
             "modul": "",
+            "kvantitet": "20",
             "sortiment": "BS",
             "ekologisk": "0",
             "koscher": "0"
@@ -47,6 +48,7 @@ var DB2 = {
             "provadargang": "",
             "alkoholhalt": "12%",
             "modul": "",
+            "kvantitet": "10",
             "sortiment": "BS",
             "ekologisk": "0",
             "koscher": "0"
@@ -72,6 +74,7 @@ var DB2 = {
             "provadargang": "",
             "alkoholhalt": "13.5%",
             "modul": "",
+            "kvantitet": "55",
             "sortiment": "BS",
             "ekologisk": "0",
             "koscher": "0"
@@ -97,6 +100,7 @@ var DB2 = {
             "provadargang": "",
             "alkoholhalt": "13.5%",
             "modul": "",
+            "kvantitet": "5",
             "sortiment": "BS",
             "ekologisk": "0",
             "koscher": "0"
@@ -122,6 +126,7 @@ var DB2 = {
             "provadargang": "",
             "alkoholhalt": "13.5%",
             "modul": "",
+            "kvantitet": "87",
             "sortiment": "BS",
             "ekologisk": "0",
             "koscher": "0"
@@ -147,6 +152,7 @@ var DB2 = {
             "provadargang": "",
             "alkoholhalt": "13.5%",
             "modul": "",
+            "kvantitet": "20",
             "sortiment": "BS",
             "ekologisk": "0",
             "koscher": "0"
@@ -172,6 +178,7 @@ var DB2 = {
             "provadargang": "",
             "alkoholhalt": "12%",
             "modul": "",
+            "kvantitet": "33",
             "sortiment": "BS",
             "ekologisk": "0",
             "koscher": "0"
@@ -197,6 +204,7 @@ var DB2 = {
             "provadargang": "",
             "alkoholhalt": "12%",
             "modul": "",
+            "kvantitet": "98",
             "sortiment": "BS",
             "ekologisk": "0",
             "koscher": "0"
@@ -222,6 +230,7 @@ var DB2 = {
             "provadargang": "",
             "alkoholhalt": "12.5%",
             "modul": "",
+            "kvantitet": "65",
             "sortiment": "BS",
             "ekologisk": "0",
             "koscher": "0"
@@ -247,6 +256,7 @@ var DB2 = {
             "provadargang": "",
             "alkoholhalt": "5%",
             "modul": "",
+            "kvantitet": "29",
             "sortiment": "BS",
             "ekologisk": "0",
             "koscher": "0"
@@ -272,6 +282,7 @@ var DB2 = {
             "provadargang": "",
             "alkoholhalt": "4.7%",
             "modul": "",
+            "kvantitet": "21",
             "sortiment": "FS",
             "ekologisk": "0",
             "koscher": "0"
@@ -297,6 +308,7 @@ var DB2 = {
             "provadargang": "",
             "alkoholhalt": "10.2%",
             "modul": "",
+            "kvantitet": "20",
             "sortiment": "FS",
             "ekologisk": "0",
             "koscher": "0"
@@ -322,6 +334,7 @@ var DB2 = {
             "provadargang": "",
             "alkoholhalt": "7.5%",
             "modul": "",
+            "kvantitet": "11",
             "sortiment": "FS",
             "ekologisk": "0",
             "koscher": "0"
@@ -347,6 +360,7 @@ var DB2 = {
             "provadargang": "",
             "alkoholhalt": "5%",
             "modul": "",
+            "kvantitet": "27",
             "sortiment": "BS",
             "ekologisk": "0",
             "koscher": "0"
@@ -372,6 +386,7 @@ var DB2 = {
             "provadargang": "",
             "alkoholhalt": "6.8%",
             "modul": "",
+            "kvantitet": "36",
             "sortiment": "BS",
             "ekologisk": "0",
             "koscher": "0"
@@ -397,6 +412,7 @@ var DB2 = {
             "provadargang": "",
             "alkoholhalt": "5.3%",
             "modul": "",
+            "kvantitet": "99",
             "sortiment": "TSLS",
             "ekologisk": "0",
             "koscher": "0"
@@ -422,6 +438,7 @@ var DB2 = {
             "provadargang": "",
             "alkoholhalt": "4.2%",
             "modul": "",
+            "kvantitet": "18",
             "sortiment": "BS",
             "ekologisk": "0",
             "koscher": "0"
@@ -447,6 +464,7 @@ var DB2 = {
             "provadargang": "",
             "alkoholhalt": "40%",
             "modul": "",
+            "kvantitet": "57",
             "sortiment": "BS",
             "ekologisk": "0",
             "koscher": "0"
@@ -472,6 +490,7 @@ var DB2 = {
             "provadargang": "",
             "alkoholhalt": "38%",
             "modul": "",
+            "kvantitet": "36",
             "sortiment": "FS",
             "ekologisk": "0",
             "koscher": "0"
@@ -497,6 +516,7 @@ var DB2 = {
             "provadargang": "",
             "alkoholhalt": "37.5%",
             "modul": "",
+            "kvantitet": "11",
             "sortiment": "FS",
             "ekologisk": "0",
             "koscher": "0"

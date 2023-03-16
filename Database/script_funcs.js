@@ -256,11 +256,16 @@ function load_beverages(divToLoad, bevList){
         let itemName = $('<span class="item-name"></span>').text(beverage.namn);
         let infoButton = $('<span class="info-button"></span>').html(' &#9432');
         let itemButton = $('<button class="item-button"></button>').text(beverage.prisinklmoms + ' SEK');
+        let availability = $('<span class="item-availability"></span>').text(beverage.kvantitet);
         let someWrapper = $('<div></div>');
 
         // STACK THEM
         someWrapper.append(itemName);
         someWrapper.append(infoButton);
+        someWrapper.append(availability);
+
+
+
         menuItem.append(someWrapper);
         menuItem.append(itemButton);
         menuDiv.append(menuItem).hide();

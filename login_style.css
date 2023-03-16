@@ -178,6 +178,7 @@ input[type="text"], input[type="password"] {
     text-align: left;
 }
 
+
 #user-info-button-wrapper{
     width: 20%;
 }
@@ -360,6 +361,10 @@ input[type="text"], input[type="password"] {
     font-size: 0.8em;
     margin-bottom: 5px;
 }
+.item-availability {
+    padding-left: 20px;
+}
+
 .info-button{
     cursor: pointer;
 }

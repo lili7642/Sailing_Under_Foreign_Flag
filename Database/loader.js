@@ -107,6 +107,19 @@ function allBeverages() {
     //
     return collector;
 }
+// get all orders
+function allOrders(){
+    var collector = [];
+    for(i=0; i< DB.bought.length; i++){
+        collector.push([DB.bought[i].transaction_id,
+                        DB.bought[i].admin_id,
+                        DB.bought[i].beer_id,
+                        DB.bought[i].amount,
+                        DB.bought[i].price,
+                        DB.bought[i].timestamp
+        ]);
+    }
+}
 
 // =====================================================================================================
 // This function returns the names of all strong beverages (i.e. all that contain a percentage of alcohol
