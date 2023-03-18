@@ -167,6 +167,7 @@ function add_to_order(beverage) {
         return;
     }
 
+
     // IF BEVERAGE ALREADY IN ORDER, CHANGE THE DIV INSTEAD OF ADDING
     if (beverage.namn in order){
         order[beverage.namn] += 1;
@@ -214,11 +215,15 @@ function add_to_order(beverage) {
     orderTotal += parseFloat(beverage.prisinklmoms);
     update_total();
 
+    // update availabilities
+    let new_quantity = beverage.kvantitet - 1;
+    edit_availability(beverage.nr, new_quantity);
 }
 
 function update_total(){
     $('#order-total-number').text(orderTotal.toFixed(2) + ' SEK');
 }
+
 
 function place_order(){
     // RESET ORDER TOTAL AND ORDER LIST
@@ -235,11 +240,14 @@ function place_order(){
 
 
 
+
+
     if(current_user.credentials < 4){
         // Pays with credit
         current_balance -= temp_total;
         $('#credit').html("<b>Balance: </b>" + current_balance.toFixed(2) + " SEK");
     }
+
 }
 
 function load_all_beverages(){
@@ -251,34 +259,38 @@ function load_all_beverages(){
 function load_beverages(divToLoad, bevList){
     let menuDiv = $(divToLoad);
     for (let beverage of bevList) {
-        // LOAD THE DIVS
-        let menuItem = $('<div class="menu-item" id="'+ beverage.artikelid +'-menuitem" draggable="true" ondragstart="drag(event)"></div>');
-        let itemName = $('<span class="item-name"></span>').text(beverage.namn);
-        let infoButton = $('<span class="info-button"></span>').html(' &#9432');
-        let itemButton = $('<button class="item-button"></button>').text(beverage.prisinklmoms + ' SEK');
-        let availability = $('<span class="item-availability"></span>').text(beverage.kvantitet);
-        let someWrapper = $('<div></div>');
+        // only display available
+        if (beverage.kvantitet > 0){
+            // LOAD THE DIVS
+            let menuItem = $('<div class="menu-item" id="'+ beverage.artikelid +'-menuitem" draggable="true" ondragstart="drag(event)"></div>');
+            let itemName = $('<span class="item-name"></span>').text(beverage.namn);
+            let infoButton = $('<span class="info-button"></span>').html(' &#9432');
+            let itemButton = $('<button class="item-button"></button>').text(beverage.prisinklmoms + ' SEK');
+            let availability = $('<span class="item-availability"></span>').text(beverage.kvantitet);
+            let someWrapper = $('<div></div>');
 
-        // STACK THEM
-        someWrapper.append(itemName);
-        someWrapper.append(infoButton);
-        someWrapper.append(availability);
+            // STACK THEM
+            someWrapper.append(itemName);
+            someWrapper.append(infoButton);
+            someWrapper.append(availability);
 
 
 
-        menuItem.append(someWrapper);
-        menuItem.append(itemButton);
-        menuDiv.append(menuItem).hide();
+            menuItem.append(someWrapper);
+            menuItem.append(itemButton);
+            menuDiv.append(menuItem).hide();
 
-        // ADD CLICK FUNCTIONS TO ORDER BUTTON AND INFO BUTTON
-        itemButton.click(function (){add_to_order(beverage);});
-        infoButton.click(function () {show_info_popup(beverage);});
-    }
+            // ADD CLICK FUNCTIONS TO ORDER BUTTON AND INFO BUTTON
+            itemButton.click(function (){add_to_order(beverage);});
+            infoButton.click(function () {show_info_popup(beverage);});
+        }
 
-    // ADD CLICK FUNCTION TO ORDER BUTTON
-    $('#order-button').on("click",function (){
-        place_order();
-    });
+            // ADD CLICK FUNCTION TO ORDER BUTTON
+            $('#order-button').on("click",function (){
+                place_order();
+            });
+        }
+
 }
 
 function show_menu(type){

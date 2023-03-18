@@ -48,7 +48,7 @@ var DB2 = {
             "provadargang": "",
             "alkoholhalt": "12%",
             "modul": "",
-            "kvantitet": "10",
+            "kvantitet": "0",
             "sortiment": "BS",
             "ekologisk": "0",
             "koscher": "0"
