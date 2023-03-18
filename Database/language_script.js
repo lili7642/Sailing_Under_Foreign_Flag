@@ -158,6 +158,7 @@ function update_view() {
 
 function change_lang(lang) {
     language = lang;
+    sessionStorage.setItem("language", language);
     update_view();
 }
 

@@ -20,10 +20,14 @@ function show_login_popup(){
 
         if (found){
             // UPDATE LOGGED IN USER
-            current_user = get_user_details(username)
+            current_user = get_user_details(username);
             current_balance = get_balance(current_user);
 
-            //LOAD USER INFO DIV
+            // save being logged in
+            sessionStorage.setItem("current_user", current_user.username);
+
+            load_login_content(current_user);
+/*            //LOAD USER INFO DIV
             load_user_box(current_user);
             // make menu set height to make room for order basket
             $('.menu-item-wrapper').css("height", "330px");
@@ -32,7 +36,7 @@ function show_login_popup(){
             orderTotal = 0;
             $('#menu-item-wrapper').css("height","330px");
             $('#order').show();
-            update_total();
+            update_total();*/
         }else{
             //DONT LOAD PAGE, LOGIN FAILED
             $('#login-message').text('Invalid username or password.').removeClass('success').addClass('error').show();
@@ -45,6 +49,20 @@ function show_login_popup(){
         $('#login-popup').hide();
 
     });
+}
+
+function load_login_content(current_user){
+    //LOAD USER INFO DIV
+    load_user_box(current_user);
+    // make menu set height to make room for order basket
+    $('.menu-item-wrapper').css("height", "330px");
+
+    //LOAD ORDER DIV
+    orderTotal = 0;
+    $('#menu-item-wrapper').css("height","330px");
+    $('#order').show();
+    update_total();
+
 }
 
 function login_function(username, password){

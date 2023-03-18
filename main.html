@@ -164,6 +164,16 @@
     let wines = allBeverages_type("vin");
     let spirits = allBeverages_type('sprit');
 
+    // retrieve user info
+    let current_language = sessionStorage.getItem("language");
+    change_lang(current_language);
+
+    if ("current_user" in sessionStorage){
+        let current_username = sessionStorage.getItem("current_user");
+        let current_user = get_user_details(current_username);
+        load_login_content(current_user);
+    }
+
 </script>
 
 </html>
