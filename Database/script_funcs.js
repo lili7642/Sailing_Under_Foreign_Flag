@@ -340,6 +340,10 @@ function load_different_views(view){
         $('#menu').show();
         $('#order').show();
     }
+    else if (view == "edit_menu"){
+        $('#menu').hide();
+        $('#order').hide();
+    }
     else if (view == "curr"){
         $('#menu').hide();
         $('#order').hide();

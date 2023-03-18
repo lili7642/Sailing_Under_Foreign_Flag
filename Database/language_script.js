@@ -34,6 +34,7 @@ dict = {
             'comment-popup-label',
             'comment-submit',
             'menu_view',
+            'edit_menu_view',
             'current_order_view',
             'past-order_view'
     ],
@@ -64,6 +65,7 @@ dict = {
         'comment-popup-label' : 'Add comment to ', //Include space at the end
         'comment-submit' : 'Add comment',
         'menu_view': 'menu',
+        'edit_menu_view': 'edit menu',
         'current_order_view': 'current orders',
         'past-order_view': 'past orders'
     },
@@ -88,6 +90,7 @@ dict = {
         'comment-popup-label' : 'Lägg till kommentar för ', //Include space at the end
         'comment-submit' : 'Lägg till kommentar',
         'menu_view': 'menu',
+        'edit_menu_view': 'edit menu',
         'current_order_view': 'current orders',
         'past-order_view': 'past orders'
     },
@@ -113,6 +116,7 @@ dict = {
         'comment-popup-label' : 'Add comment to ', //Include space at the end
         'comment-submit' : 'Add comment',
         'menu_view': 'menu',
+        'edit_menu_view': 'edit menu',
         'current_order_view': 'current orders',
         'past-order_view': 'past orders'
     },
@@ -138,6 +142,7 @@ dict = {
         'comment-popup-label' : 'Kommentar hinzufügen ', //Include space at the end
         'comment-submit' : 'Hinzufügen',
         'menu_view': 'Menü',
+        'edit_menu_view': 'Menü bearbeiten',
         'current_order_view': 'Aktuelle Bestellungen',
         'past-order_view': 'Alte Bestellungen'
     },
