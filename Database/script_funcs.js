@@ -59,9 +59,16 @@ function load_login_content(current_user){
 
 function show_different_views(current_user){
     let credentials = current_user.credentials;
-    // Manager
-    if (credentials < 4) {
+    // "0" : "Manager", "1" : "Bartender", "2" : "Waiter", "3" : "VIP Guest", "4" : "Guest"}
+    // Manager can edit and see past transactions
+    if (credentials < 3) {
         $('#switch-view').show();
+        if (credentials == 1  || credentials == 2){
+            $('#manager-buttons').hide();
+            $('#current_order_view').css("border-bottom", "3px solid #ccc");
+            $('#current_order_view').css("border-bottom-right-radius", "5px");
+        }
+
     }
 }
 
