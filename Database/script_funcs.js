@@ -27,16 +27,7 @@ function show_login_popup(){
             sessionStorage.setItem("current_user", current_user.username);
 
             load_login_content(current_user);
-/*            //LOAD USER INFO DIV
-            load_user_box(current_user);
-            // make menu set height to make room for order basket
-            $('.menu-item-wrapper').css("height", "330px");
 
-            //LOAD ORDER DIV
-            orderTotal = 0;
-            $('#menu-item-wrapper').css("height","330px");
-            $('#order').show();
-            update_total();*/
         }else{
             //DONT LOAD PAGE, LOGIN FAILED
             $('#login-message').text('Invalid username or password.').removeClass('success').addClass('error').show();
@@ -54,6 +45,7 @@ function show_login_popup(){
 function load_login_content(current_user){
     //LOAD USER INFO DIV
     load_user_box(current_user);
+    show_different_views(current_user);
     // make menu set height to make room for order basket
     $('.menu-item-wrapper').css("height", "330px");
 
@@ -63,6 +55,14 @@ function load_login_content(current_user){
     $('#order').show();
     update_total();
 
+}
+
+function show_different_views(current_user){
+    let credentials = current_user.credentials;
+    // Manager
+    if (credentials < 4) {
+        $('#switch-view').show();
+    }
 }
 
 function login_function(username, password){
@@ -85,7 +85,8 @@ function logout_function(){
     // hide user stuff
     $('#user-info').hide();
     $('#not-logged-in-wrapper').show();
-    $('#order').hide()
+    $('#order').hide();
+    $('#switch-view').hide();
 
     // reset user variables
     current_user = null;
@@ -98,6 +99,8 @@ function logout_function(){
     $('#thank-you-order-message').hide();
 
     $('.menu-item-wrapper').css("height", "100%");
+
+    sessionStorage.removeItem("current_user");
 
 }
 
@@ -329,6 +332,21 @@ function choose_category_function(divId){
         show_menu('wine-menu');
     }else if(divId === "spirit-category"){
         show_menu('spirit-menu');
+    }
+}
+
+function load_different_views(view){
+    if (view == "menu"){
+        $('#menu').show();
+        $('#order').show();
+    }
+    else if (view == "curr"){
+        $('#menu').hide();
+        $('#order').hide();
+    }
+    else if (view == "past") {
+        $('#menu').hide();
+        $('#order').hide();
     }
 }
 

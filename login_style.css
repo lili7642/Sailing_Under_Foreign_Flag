@@ -13,6 +13,36 @@ h1{
     font-family: "Comic Sans MS";
 }
 
+#switch-view{
+    display:none;
+    position:fixed;
+    left: 0px;
+}
+
+.switch-button{
+    display:block;
+    width: 120px;
+    background-color: #fff;
+    border: 3px solid #ccc;
+    border-left: none;
+    border-bottom: none;
+    color: black;
+    padding: 5px 5px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+
+}
+
+#menu_view{
+    border-top-right-radius: 5px;
+}
+
+#past-order_view{
+    border-bottom: 3px solid #ccc;
+    border-bottom-right-radius: 5px;
+}
+
 #language-button-container{
     margin-left: 5%;
     margin-right: 5%;
