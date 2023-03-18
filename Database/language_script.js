@@ -36,7 +36,8 @@ dict = {
             'menu_view',
             'edit_menu_view',
             'current_order_view',
-            'past-order_view'
+            'past-order_view',
+            'outstanding'
     ],
 
     // We use one JSON substructure for each language. If we have
@@ -67,7 +68,8 @@ dict = {
         'menu_view': 'menu',
         'edit_menu_view': 'edit menu',
         'current_order_view': 'current orders',
-        'past-order_view': 'past orders'
+        'past-order_view': 'past orders',
+        'outstanding': 'outstanding'
     },
     'sv' : {
         'guest-mode-text' : "Du tittar som gäst.",
@@ -92,7 +94,8 @@ dict = {
         'menu_view': 'menu',
         'edit_menu_view': 'edit menu',
         'current_order_view': 'current orders',
-        'past-order_view': 'past orders'
+        'past-order_view': 'past orders',
+        'outstanding': 'outstanding'
     },
     // FILL WITH TURKISH TRANSLATION
     'tr': {
@@ -118,7 +121,8 @@ dict = {
         'menu_view': 'menu',
         'edit_menu_view': 'edit menu',
         'current_order_view': 'current orders',
-        'past-order_view': 'past orders'
+        'past-order_view': 'past orders',
+        'outstanding': 'outstanding'
     },
 
     'de': {
@@ -144,7 +148,8 @@ dict = {
         'menu_view': 'Menü',
         'edit_menu_view': 'Menü bearbeiten',
         'current_order_view': 'Aktuelle Bestellungen',
-        'past-order_view': 'Alte Bestellungen'
+        'past-order_view': 'Alte Bestellungen',
+        'outstanding': 'Aktuelle Bestellungen'
     },
 }
 

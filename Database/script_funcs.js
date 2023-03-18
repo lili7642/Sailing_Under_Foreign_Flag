@@ -278,13 +278,14 @@ function place_order(){
 
 }
 
-function load_all_beverages(){
-    load_beverages("#beer-menu", beers);
-    load_beverages("#wine-menu", wines);
-    load_beverages("#spirit-menu", spirits);
+function load_all_beverages(credentials){
+    load_beverages("#beer-menu", beers, credentials);
+    load_beverages("#wine-menu", wines, credentials);
+    load_beverages("#spirit-menu", spirits, credentials);
 }
 
-function load_beverages(divToLoad, bevList){
+// TODO: modify based on credentials
+function load_beverages(divToLoad, bevList, credentials){
     let menuDiv = $(divToLoad);
     for (let beverage of bevList) {
         // only display available
@@ -346,18 +347,60 @@ function load_different_views(view){
     if (view == "menu"){
         $('#menu').show();
         $('#order').show();
+        $('#to_deliver').hide();
     }
     else if (view == "edit_menu"){
         $('#menu').hide();
         $('#order').hide();
+        $('#to_deliver').hide();
     }
     else if (view == "curr"){
         $('#menu').hide();
         $('#order').hide();
+        $('#to_deliver').show();
+        // only generate the first time
+        if ($("#gen_to_deliver").html() === ""){
+            retrieve_orders();
+        }
+
     }
     else if (view == "past") {
         $('#menu').hide();
         $('#order').hide();
+        $('#to_deliver').hide();
+    }
+}
+
+// display all outstanding orders
+function retrieve_orders(){
+    let orderDiv = $('#gen_to_deliver');
+
+    let orderItem = $('<div class="outstanding_order-item"></div>');
+
+    let someWrapper = $('<div></div>');
+    for (let order of DB.ordered){
+        let simpleSpan = $('<span class="outstanding_order-table"></span>');
+        let tableNr = $('<span class="text_table"></span>').text("Table " + order.table);
+        let this_id = order.transaction_id;
+
+        let ordered_items =  $('<span class="ordered-spirit"></span>');
+        // for (let item of order.order_dict.keys()){
+        //     ordered_items.append(item);
+        // }
+        //
+        let has_paid = order.paid;
+        let hasPaidButton;
+        if (has_paid == "yes"){
+            hasPaidButton = $('<button class="pay-button" id="' + this_id + '-button" style="background-color: #3e8e41"></button>').text("paid");
+        } else {
+            hasPaidButton = $('<button class="pay-button" id="' + this_id + '-button" style="background-color: #cc504a" onclick="confirm_payment(id) "></button>').text("paid");
+        }
+
+
+        simpleSpan.append(tableNr);
+        simpleSpan.append(hasPaidButton);
+        orderItem.append(simpleSpan);
+        orderDiv.append(orderItem);
     }
 }
 

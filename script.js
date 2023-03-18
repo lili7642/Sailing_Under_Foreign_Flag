@@ -26,7 +26,7 @@ $(function() {
 
 
     // LOAD THE MENU ---------------------------------------------------------------------
-    load_all_beverages();
+    load_all_beverages(4);
     // start with beer showing
     $('#beer-menu').show();
 
