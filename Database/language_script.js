@@ -5,7 +5,12 @@
 // exercise.
 //
 
-let language = 'en';
+//let language = 'en';
+
+if(!localStorage.language){
+    localStorage.language = 'en';
+}
+
 
 // ==========================================================================
 // The dictionary consists of a simple JSON structure. It also keeps
@@ -132,7 +137,7 @@ dict = {
 // key. The language handling is made "automatic".
 //
 function get_string(key) {
-    return dict[language][key];
+    return dict[localStorage.language][key];
 }
 
 // This function is the simplest possible. However, in order
@@ -157,7 +162,7 @@ function update_view() {
 }
 
 function change_lang(lang) {
-    language = lang;
+    localStorage.language = lang;
     update_view();
 }
 
