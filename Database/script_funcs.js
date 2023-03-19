@@ -255,6 +255,29 @@ function update_total(){
 
 
 function place_order(){
+
+    // collect what needs to be put into DB.ordered
+    let order_keys = Object.keys(order);
+    let order_vals = Object.values(order);
+    let dict = [];
+    for (let elem in order_keys){
+        let this_key = order_keys[elem];
+        let this_val = order_vals[elem];
+        dict.push({
+            [this_key]:   this_val
+        });
+    }
+
+    add_order_to_ordered(
+        {"transaction_id": last_ordered_id()+1,
+               "table": "4",
+               "order_dict": dict,
+               "price": orderTotal,
+               "timestamp":Date.now(),
+                "paid": "no"
+        }
+    );
+
     // RESET ORDER TOTAL AND ORDER LIST
     let temp_total = orderTotal;
     orderTotal = 0;
@@ -306,9 +329,6 @@ function load_beverages(divToLoad, bevList, credentials){
             someWrapper.append(availability);
 
 
-
-
-
             menuItem.append(someWrapper);
             menuItem.append(itemButton);
             menuDiv.append(menuItem).hide();
@@ -317,13 +337,11 @@ function load_beverages(divToLoad, bevList, credentials){
             itemButton.click(function (){add_to_order(beverage);});
             infoButton.click(function () {show_info_popup(beverage);});
         }
-
-            // ADD CLICK FUNCTION TO ORDER BUTTON
-            $('#order-button').on("click",function (){
-                place_order();
-            });
-        }
-
+    }
+    // ADD CLICK FUNCTION TO ORDER BUTTON
+    $('#order-button').on("click",function (){
+        place_order();
+    });
 }
 
 function show_menu(type){
@@ -402,11 +420,15 @@ function retrieve_orders(){
 
     let someWrapper = $('<div></div>');
     for (let order of DB.ordered){
+        // retrieve from database:
+        // table, ordered items, price, paid yes / no
         let simpleSpan = $('<span class="outstanding_order-table"></span>');
         let tableNr = $('<span class="text_table"></span>').text("Table " + order.table + ":");
         let this_id = order.transaction_id;
+        let price = $('<span class="text_price"></span>').text("Price: " + order.price);
 
         let ordered_items =  $('<span class="ordered-spirit"></span>');
+        // retrieve all items and amounts
         for (let i = 0; i < order.order_dict.length; i++){
 
             let keys = Object.keys(order.order_dict[i]);
@@ -421,7 +443,7 @@ function retrieve_orders(){
 
             }
        }
-        //
+        // stack them
         let has_paid = order.paid;
         let hasPaidButton;
         if (has_paid == "yes"){
@@ -433,6 +455,7 @@ function retrieve_orders(){
 
         simpleSpan.append(tableNr);
         simpleSpan.append(ordered_items);
+        simpleSpan.append(price);
         simpleSpan.append(hasPaidButton);
         orderItem.append(simpleSpan);
         // orderItem.append(hasPaidButton);

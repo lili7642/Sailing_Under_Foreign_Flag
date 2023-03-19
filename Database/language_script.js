@@ -148,7 +148,7 @@ dict = {
         'thank-you-order-message' : 'Vielen Dank für Ihre Bestellung',
         'order-button' : 'Bestellung aufgeben',
         'order-total-label' : 'Total: ', //Include space at the end
-        'comment-popup-label' : 'Kommentar hinzufügen ', //Include space at the end
+        'comment-popup-label' : 'Kommentar hinzufügen zu ', //Include space at the end
         'comment-submit' : 'Hinzufügen',
         'menu_view': 'Menü',
         'edit_menu_view': 'Menü bearbeiten',

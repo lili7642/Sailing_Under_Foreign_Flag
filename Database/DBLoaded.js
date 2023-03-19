@@ -683,7 +683,7 @@ var DB = {
             "transaction_id": "9938",
             "table": "6",
             "order_dict": [{"Radici": "1"}],
-            "price": "24.90",
+            "price": "11.90",
             "timestamp": "2014-10-02 16:05:21",
             "paid": "no"
         }

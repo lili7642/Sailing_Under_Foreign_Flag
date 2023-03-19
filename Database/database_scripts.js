@@ -71,3 +71,16 @@ function confirm_payment(my_transaction_id){
     }
 }
 
+function add_order_to_ordered(order){
+    DB.ordered.push(order);
+    // $.extend(DB.ordered,x);
+    // JSON.stringify(DB.ordered);
+}
+
+//get the last used transaction id
+function last_ordered_id(){
+    let x = DB.ordered.length;
+    $('#testtest').append(DB.ordered[x-1].transaction_id);
+    return DB.ordered[x-1].transaction_id;
+}
+
