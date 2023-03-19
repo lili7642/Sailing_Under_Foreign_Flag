@@ -274,7 +274,7 @@ function place_order(){
                "order_dict": dict,
                "price": orderTotal,
                "timestamp":Date.now(),
-                "paid": "no"
+               "paid": "no"
         }
     );
 
