@@ -17,7 +17,6 @@ $(function() {
         $('#popup').show();
         show_deposit_popup();
     });
-
     // CATEGORY BUTTONS ------------------------------------------------------------------
     let categoryButtons = $('.menu-category');
     categoryButtons.on("click", function(){

@@ -96,10 +96,10 @@ dict = {
         'order-total-label' : 'Summa: ', //Include space at the end
         'comment-popup-label' : 'Lägg till kommentar för ', //Include space at the end
         'comment-submit' : 'Lägg till kommentar',
-        'menu_view': 'menu',
-        'edit_menu_view': 'edit menu',
-        'current_order_view': 'current orders',
-        'past-order_view': 'past orders',
+        'menu_view': 'Meny',
+        'edit_menu_view': 'Redigera menu',
+        'current_order_view': 'Aktuella beställningar',
+        'past-order_view': 'Tidigare beställningar',
         'outstanding': 'outstanding'
     },
     // FILL WITH TURKISH TRANSLATION
@@ -187,9 +187,6 @@ function update_view() {
 }
 
 function change_lang(lang) {
-
-    language = lang;
-    sessionStorage.setItem("language", language);
     localStorage.language = lang;
     update_view();
 }
