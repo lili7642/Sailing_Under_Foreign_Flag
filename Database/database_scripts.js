@@ -60,11 +60,13 @@ function get_balance(userinfo){
     }
 }
 
-function confirm_payment(transaction_id){
-    document.getElementById(transaction_id).style.backgroundColor = '#3e8e41';
-    for (let i = 0; i < DB.ordered; i++) {
-        if (DB.ordered[i].transaction_id === transaction_id) {
-            DB.ordered[i].paid = "yes";
+function confirm_payment(my_transaction_id){
+    // update view
+    document.getElementById(my_transaction_id).style.backgroundColor = '#3e8e41';
+    // update model
+    for (let y = 0; y < DB.ordered.length; y++) {
+        if (DB.ordered[y].transaction_id === my_transaction_id) {
+            DB.ordered[y].paid = "yes";
         }
     }
 }

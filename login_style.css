@@ -452,6 +452,9 @@ input[type="text"], input[type="password"] {
     border-radius: 5px;
     width: 20%;
 }
+#edit_menu_div{
+    display:none;
+}
 
 
 

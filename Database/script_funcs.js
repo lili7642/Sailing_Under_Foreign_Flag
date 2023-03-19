@@ -108,6 +108,7 @@ function logout_function(){
     $('.menu-item-wrapper').css("height", "100%");
 
     sessionStorage.removeItem("current_user");
+    load_different_views("menu");
 
 }
 
@@ -298,10 +299,13 @@ function load_beverages(divToLoad, bevList, credentials){
             let availability = $('<span class="item-availability"></span>').text(beverage.kvantitet);
             let someWrapper = $('<div></div>');
 
+
             // STACK THEM
             someWrapper.append(itemName);
             someWrapper.append(infoButton);
             someWrapper.append(availability);
+
+
 
 
 
@@ -348,15 +352,22 @@ function load_different_views(view){
         $('#menu').show();
         $('#order').show();
         $('#to_deliver').hide();
+        $('#edit_menu_div').hide();
     }
     else if (view == "edit_menu"){
-        $('#menu').hide();
+        $('#menu').show();
         $('#order').hide();
         $('#to_deliver').hide();
+        $('#edit_menu_div').show();
+        // only generate the first time
+        if ($("#gen_edit_menu_div").html() === ""){
+            display_edit_menu();
+        }
     }
     else if (view == "curr"){
         $('#menu').hide();
         $('#order').hide();
+        $('#edit_menu_div').hide();
         $('#to_deliver').show();
         // only generate the first time
         if ($("#gen_to_deliver").html() === ""){
@@ -368,8 +379,14 @@ function load_different_views(view){
         $('#menu').hide();
         $('#order').hide();
         $('#to_deliver').hide();
+        $('#edit_menu_div').hide();
     }
 }
+
+// display all items to be able to modify them
+function display_edit_menu(){
+}
+
 
 // display all outstanding orders
 function retrieve_orders(){
@@ -391,9 +408,9 @@ function retrieve_orders(){
         let has_paid = order.paid;
         let hasPaidButton;
         if (has_paid == "yes"){
-            hasPaidButton = $('<button class="pay-button" id="' + this_id + '-button" style="background-color: #3e8e41"></button>').text("paid");
+            hasPaidButton = $('<button class="pay-button" id="' + this_id + '" style="background-color: #3e8e41"></button>').text("paid");
         } else {
-            hasPaidButton = $('<button class="pay-button" id="' + this_id + '-button" style="background-color: #cc504a" onclick="confirm_payment(id) "></button>').text("paid");
+            hasPaidButton = $('<button class="pay-button" id="' + this_id + '" style="background-color: #cc504a" onclick="confirm_payment(id) "></button>').text("paid");
         }
 
 
