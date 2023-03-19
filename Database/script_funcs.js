@@ -403,13 +403,24 @@ function retrieve_orders(){
     let someWrapper = $('<div></div>');
     for (let order of DB.ordered){
         let simpleSpan = $('<span class="outstanding_order-table"></span>');
-        let tableNr = $('<span class="text_table"></span>').text("Table " + order.table);
+        let tableNr = $('<span class="text_table"></span>').text("Table " + order.table + ":");
         let this_id = order.transaction_id;
 
         let ordered_items =  $('<span class="ordered-spirit"></span>');
-        // for (let item of order.order_dict.keys()){
-        //     ordered_items.append(item);
-        // }
+        for (let i = 0; i < order.order_dict.length; i++){
+
+            let keys = Object.keys(order.order_dict[i]);
+            let values = Object.values(order.order_dict[i]);
+            for(let index in keys){
+                let each_entry = $('<span class="spirit_entry"></span>');
+                let item_entry = $('<span class="spirit_name_entry"></span>').text(keys[index] + ": ");
+                let amount_entry = $('<span class="spirit_name_entry"></span>').text(values[index] + " ");
+                each_entry.append(item_entry);
+                each_entry.append(amount_entry);
+                ordered_items.append(each_entry);
+
+            }
+       }
         //
         let has_paid = order.paid;
         let hasPaidButton;
@@ -421,8 +432,10 @@ function retrieve_orders(){
 
 
         simpleSpan.append(tableNr);
+        simpleSpan.append(ordered_items);
         simpleSpan.append(hasPaidButton);
         orderItem.append(simpleSpan);
+        // orderItem.append(hasPaidButton);
         orderDiv.append(orderItem);
     }
 }

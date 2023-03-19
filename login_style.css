@@ -420,7 +420,9 @@ input[type="text"], input[type="password"] {
 }
 
 /*outstanding Orders*/
+
 .outstanding_order-item {
+    height: auto;
     display: block;
     background-color: #ffffff;
     border: 3px solid #ccc;
@@ -431,16 +433,27 @@ input[type="text"], input[type="password"] {
     text-align: left;
 }
 
+.spirit_entry{
+    display: block;
+    padding:2px;
+    font-weight: normal;
+}
+
 .text_table{
     padding-right: 5px;
 }
+
+.gen_to_deliver{
+    height: max-content;
+}
+
 .outstanding_order-table{
     display: block;
     padding:5px;
 }
 
 .pay-button {
-    display: inline;
+    display: inline-list-item;
     border: none;
     float: right;
     color: white;
