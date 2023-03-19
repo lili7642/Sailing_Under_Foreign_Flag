@@ -13,6 +13,43 @@ h1{
     font-family: "Comic Sans MS";
 }
 
+#switch-view{
+    display:none;
+    position:fixed;
+    left: 0px;
+}
+
+.switch-button{
+    display:block;
+    width: 120px;
+    background-color: #fff;
+    border: 3px solid #ccc;
+    border-left: none;
+    border-bottom: none;
+    color: black;
+    padding: 5px 5px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+
+}
+
+#menu_view{
+    border-top-right-radius: 5px;
+}
+
+#past-order_view{
+    border-bottom: 3px solid #ccc;
+    border-bottom-right-radius: 5px;
+}
+
+#to_deliver{
+    display:none;
+    margin:5%;
+    font-size: 14px;
+    font-weight: bold;
+}
+
 #language-button-container{
     margin-left: 5%;
     margin-right: 5%;
@@ -177,6 +214,7 @@ input[type="text"], input[type="password"] {
 #user-info-text-wrapper{
     text-align: left;
 }
+
 
 #user-info-button-wrapper{
     width: 20%;
@@ -360,6 +398,10 @@ input[type="text"], input[type="password"] {
     font-size: 0.8em;
     margin-bottom: 5px;
 }
+.item-availability {
+    padding-left: 20px;
+}
+
 .info-button{
     cursor: pointer;
 }
@@ -376,6 +418,45 @@ input[type="text"], input[type="password"] {
 .item-button:hover{
     background-color: #3e8e41;
 }
+
+/*outstanding Orders*/
+.outstanding_order-item {
+    display: block;
+    background-color: #ffffff;
+    border: 3px solid #ccc;
+    padding: 2%;
+    border-radius: 5px;
+    border-bottom: 2px solid #ccc;
+
+    text-align: left;
+}
+
+.text_table{
+    padding-right: 5px;
+}
+.outstanding_order-table{
+    display: block;
+    padding:5px;
+}
+
+.pay-button {
+    display: inline;
+    border: none;
+    float: right;
+    color: white;
+    padding: 5px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 12px;
+    cursor: pointer;
+    border-radius: 5px;
+    width: 20%;
+}
+#edit_menu_div{
+    display:none;
+}
+
+
 
 /* INFO POPUP */
 #info-popup{

@@ -48,12 +48,25 @@ function get_user_details(userName) {
     return userCollect;
 }
 
+
+
 function get_balance(userinfo){
     let account;
     for (let i = 0; i < DB.account.length; i++) {
         if (DB.users[i].username === userinfo.username) {
             account = DB.account[i].creditSEK;
             return account;
+        }
+    }
+}
+
+function confirm_payment(my_transaction_id){
+    // update view
+    document.getElementById(my_transaction_id).style.backgroundColor = '#3e8e41';
+    // update model
+    for (let y = 0; y < DB.ordered.length; y++) {
+        if (DB.ordered[y].transaction_id === my_transaction_id) {
+            DB.ordered[y].paid = "yes";
         }
     }
 }

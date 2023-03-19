@@ -20,19 +20,14 @@ function show_login_popup(){
 
         if (found){
             // UPDATE LOGGED IN USER
-            current_user = get_user_details(username)
+            current_user = get_user_details(username);
             current_balance = get_balance(current_user);
 
-            //LOAD USER INFO DIV
-            load_user_box(current_user);
-            // make menu set height to make room for order basket
-            $('.menu-item-wrapper').css("height", "330px");
+            // save being logged in
+            sessionStorage.setItem("current_user", current_user.username);
 
-            //LOAD ORDER DIV
-            orderTotal = 0;
-            $('#menu-item-wrapper').css("height","330px");
-            $('#order').show();
-            update_total();
+            load_login_content(current_user);
+
         }else{
             //DONT LOAD PAGE, LOGIN FAILED
             $('#login-message').text('Invalid username or password.').removeClass('success').addClass('error').show();
@@ -45,6 +40,36 @@ function show_login_popup(){
         $('#login-popup').hide();
 
     });
+}
+
+function load_login_content(current_user){
+    //LOAD USER INFO DIV
+    load_user_box(current_user);
+    show_different_views(current_user);
+    // make menu set height to make room for order basket
+    $('.menu-item-wrapper').css("height", "330px");
+
+    //LOAD ORDER DIV
+    orderTotal = 0;
+    $('#menu-item-wrapper').css("height","330px");
+    $('#order').show();
+    update_total();
+
+}
+
+function show_different_views(current_user){
+    let credentials = current_user.credentials;
+    // "0" : "Manager", "1" : "Bartender", "2" : "Waiter", "3" : "VIP Guest", "4" : "Guest"}
+    // Manager can edit and see past transactions
+    if (credentials < 3) {
+        $('#switch-view').show();
+        if (credentials == 1  || credentials == 2){
+            $('#manager-buttons').hide();
+            $('#current_order_view').css("border-bottom", "3px solid #ccc");
+            $('#current_order_view').css("border-bottom-right-radius", "5px");
+        }
+
+    }
 }
 
 function login_function(username, password){
@@ -67,7 +92,8 @@ function logout_function(){
     // hide user stuff
     $('#user-info').hide();
     $('#not-logged-in-wrapper').show();
-    $('#order').hide()
+    $('#order').hide();
+    $('#switch-view').hide();
 
     // reset user variables
     current_user = null;
@@ -80,6 +106,9 @@ function logout_function(){
     $('#thank-you-order-message').hide();
 
     $('.menu-item-wrapper').css("height", "100%");
+
+    sessionStorage.removeItem("current_user");
+    load_different_views("menu");
 
 }
 
@@ -167,6 +196,7 @@ function add_to_order(beverage) {
         return;
     }
 
+
     // IF BEVERAGE ALREADY IN ORDER, CHANGE THE DIV INSTEAD OF ADDING
     if (beverage.namn in order){
         order[beverage.namn] += 1;
@@ -214,11 +244,15 @@ function add_to_order(beverage) {
     orderTotal += parseFloat(beverage.prisinklmoms);
     update_total();
 
+    // update availabilities
+    let new_quantity = beverage.kvantitet - 1;
+    edit_availability(beverage.nr, new_quantity);
 }
 
 function update_total(){
     $('#order-total-number').text(orderTotal.toFixed(2) + ' SEK');
 }
+
 
 function place_order(){
     // RESET ORDER TOTAL AND ORDER LIST
@@ -235,45 +269,61 @@ function place_order(){
 
 
 
+
+
     if(current_user.credentials < 4){
         // Pays with credit
         current_balance -= temp_total;
         $('#credit').html("<b>Balance: </b>" + current_balance.toFixed(2) + " SEK");
     }
+
 }
 
-function load_all_beverages(){
-    load_beverages("#beer-menu", beers);
-    load_beverages("#wine-menu", wines);
-    load_beverages("#spirit-menu", spirits);
+function load_all_beverages(credentials){
+    load_beverages("#beer-menu", beers, credentials);
+    load_beverages("#wine-menu", wines, credentials);
+    load_beverages("#spirit-menu", spirits, credentials);
 }
 
-function load_beverages(divToLoad, bevList){
+// TODO: modify based on credentials
+function load_beverages(divToLoad, bevList, credentials){
     let menuDiv = $(divToLoad);
     for (let beverage of bevList) {
-        // LOAD THE DIVS
-        let menuItem = $('<div class="menu-item" id="'+ beverage.artikelid +'-menuitem" draggable="true" ondragstart="drag(event)"></div>');
-        let itemName = $('<span class="item-name"></span>').text(beverage.namn);
-        let infoButton = $('<span class="info-button"></span>').html(' &#9432');
-        let itemButton = $('<button class="item-button"></button>').text(beverage.prisinklmoms + ' SEK');
-        let someWrapper = $('<div></div>');
+        // only display available
+        if (beverage.kvantitet > 0){
+            // LOAD THE DIVS
+            let menuItem = $('<div class="menu-item" id="'+ beverage.artikelid +'-menuitem" draggable="true" ondragstart="drag(event)"></div>');
+            let itemName = $('<span class="item-name"></span>').text(beverage.namn);
+            let infoButton = $('<span class="info-button"></span>').html(' &#9432');
+            let itemButton = $('<button class="item-button"></button>').text(beverage.prisinklmoms + ' SEK');
+            let availability = $('<span class="item-availability"></span>').text(beverage.kvantitet);
+            let someWrapper = $('<div></div>');
 
-        // STACK THEM
-        someWrapper.append(itemName);
-        someWrapper.append(infoButton);
-        menuItem.append(someWrapper);
-        menuItem.append(itemButton);
-        menuDiv.append(menuItem).hide();
 
-        // ADD CLICK FUNCTIONS TO ORDER BUTTON AND INFO BUTTON
-        itemButton.click(function (){add_to_order(beverage);});
-        infoButton.click(function () {show_info_popup(beverage);});
-    }
+            // STACK THEM
+            someWrapper.append(itemName);
+            someWrapper.append(infoButton);
+            someWrapper.append(availability);
 
-    // ADD CLICK FUNCTION TO ORDER BUTTON
-    $('#order-button').on("click",function (){
-        place_order();
-    });
+
+
+
+
+            menuItem.append(someWrapper);
+            menuItem.append(itemButton);
+            menuDiv.append(menuItem).hide();
+
+            // ADD CLICK FUNCTIONS TO ORDER BUTTON AND INFO BUTTON
+            itemButton.click(function (){add_to_order(beverage);});
+            infoButton.click(function () {show_info_popup(beverage);});
+        }
+
+            // ADD CLICK FUNCTION TO ORDER BUTTON
+            $('#order-button').on("click",function (){
+                place_order();
+            });
+        }
+
 }
 
 function show_menu(type){
@@ -294,6 +344,80 @@ function choose_category_function(divId){
         show_menu('wine-menu');
     }else if(divId === "spirit-category"){
         show_menu('spirit-menu');
+    }
+}
+
+function load_different_views(view){
+    if (view == "menu"){
+        $('#menu').show();
+        $('#order').show();
+        $('#to_deliver').hide();
+        $('#edit_menu_div').hide();
+    }
+    else if (view == "edit_menu"){
+        $('#menu').show();
+        $('#order').hide();
+        $('#to_deliver').hide();
+        $('#edit_menu_div').show();
+        // only generate the first time
+        if ($("#gen_edit_menu_div").html() === ""){
+            display_edit_menu();
+        }
+    }
+    else if (view == "curr"){
+        $('#menu').hide();
+        $('#order').hide();
+        $('#edit_menu_div').hide();
+        $('#to_deliver').show();
+        // only generate the first time
+        if ($("#gen_to_deliver").html() === ""){
+            retrieve_orders();
+        }
+
+    }
+    else if (view == "past") {
+        $('#menu').hide();
+        $('#order').hide();
+        $('#to_deliver').hide();
+        $('#edit_menu_div').hide();
+    }
+}
+
+// display all items to be able to modify them
+function display_edit_menu(){
+}
+
+
+// display all outstanding orders
+function retrieve_orders(){
+    let orderDiv = $('#gen_to_deliver');
+
+    let orderItem = $('<div class="outstanding_order-item"></div>');
+
+    let someWrapper = $('<div></div>');
+    for (let order of DB.ordered){
+        let simpleSpan = $('<span class="outstanding_order-table"></span>');
+        let tableNr = $('<span class="text_table"></span>').text("Table " + order.table);
+        let this_id = order.transaction_id;
+
+        let ordered_items =  $('<span class="ordered-spirit"></span>');
+        // for (let item of order.order_dict.keys()){
+        //     ordered_items.append(item);
+        // }
+        //
+        let has_paid = order.paid;
+        let hasPaidButton;
+        if (has_paid == "yes"){
+            hasPaidButton = $('<button class="pay-button" id="' + this_id + '" style="background-color: #3e8e41"></button>').text("paid");
+        } else {
+            hasPaidButton = $('<button class="pay-button" id="' + this_id + '" style="background-color: #cc504a" onclick="confirm_payment(id) "></button>').text("paid");
+        }
+
+
+        simpleSpan.append(tableNr);
+        simpleSpan.append(hasPaidButton);
+        orderItem.append(simpleSpan);
+        orderDiv.append(orderItem);
     }
 }
 

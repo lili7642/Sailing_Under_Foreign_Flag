@@ -37,7 +37,12 @@ dict = {
             'order-button',
             'order-total-label',
             'comment-popup-label',
-            'comment-submit'
+            'comment-submit',
+            'menu_view',
+            'edit_menu_view',
+            'current_order_view',
+            'past-order_view',
+            'outstanding'
     ],
 
     // We use one JSON substructure for each language. If we have
@@ -64,7 +69,12 @@ dict = {
         'order-button' : 'Place order',
         'order-total-label' : 'Total: ', //Include space at the end
         'comment-popup-label' : 'Add comment to ', //Include space at the end
-        'comment-submit' : 'Add comment'
+        'comment-submit' : 'Add comment',
+        'menu_view': 'menu',
+        'edit_menu_view': 'edit menu',
+        'current_order_view': 'current orders',
+        'past-order_view': 'past orders',
+        'outstanding': 'outstanding'
     },
     'sv' : {
         'guest-mode-text' : "Du tittar som gäst.",
@@ -85,7 +95,12 @@ dict = {
         'order-button' : 'Beställ',
         'order-total-label' : 'Summa: ', //Include space at the end
         'comment-popup-label' : 'Lägg till kommentar för ', //Include space at the end
-        'comment-submit' : 'Lägg till kommentar'
+        'comment-submit' : 'Lägg till kommentar',
+        'menu_view': 'menu',
+        'edit_menu_view': 'edit menu',
+        'current_order_view': 'current orders',
+        'past-order_view': 'past orders',
+        'outstanding': 'outstanding'
     },
     // FILL WITH TURKISH TRANSLATION
     'tr': {
@@ -107,7 +122,12 @@ dict = {
         'order-button' : 'Place order',
         'order-total-label' : 'Total: ', //Include space at the end
         'comment-popup-label' : 'Add comment to ', //Include space at the end
-        'comment-submit' : 'Add comment'
+        'comment-submit' : 'Add comment',
+        'menu_view': 'menu',
+        'edit_menu_view': 'edit menu',
+        'current_order_view': 'current orders',
+        'past-order_view': 'past orders',
+        'outstanding': 'outstanding'
     },
 
     'de': {
@@ -129,7 +149,12 @@ dict = {
         'order-button' : 'Bestellung aufgeben',
         'order-total-label' : 'Total: ', //Include space at the end
         'comment-popup-label' : 'Kommentar hinzufügen ', //Include space at the end
-        'comment-submit' : 'Hinzufügen'
+        'comment-submit' : 'Hinzufügen',
+        'menu_view': 'Menü',
+        'edit_menu_view': 'Menü bearbeiten',
+        'current_order_view': 'Aktuelle Bestellungen',
+        'past-order_view': 'Alte Bestellungen',
+        'outstanding': 'Aktuelle Bestellungen'
     },
 }
 
@@ -162,6 +187,9 @@ function update_view() {
 }
 
 function change_lang(lang) {
+
+    language = lang;
+    sessionStorage.setItem("language", language);
     localStorage.language = lang;
     update_view();
 }

@@ -75,6 +75,23 @@
 
     </div>
 
+    <!-- view switching -->
+
+    <div id="switch-view">
+        <div id="switch-view-buttons">
+            <div id="reduced-switch-view-buttons">
+                <button class="switch-button" id="menu_view" onclick="load_different_views('menu')">menu</button>
+                <button class="switch-button" id="current_order_view" onclick="load_different_views('curr')">current orders</button>
+            </div>
+            <div id="manager-buttons">
+            <button class="switch-button" id="edit_menu_view" onclick="load_different_views('edit_menu')">edit menu</button>
+            <button class="switch-button" id="past-order_view" onclick="load_different_views('past')">past orders</button>
+            </div>
+        </div>
+
+    </div>
+
+
     <!-- DEPOSIT MONEY POPUP -->
 
     <div id="popup">
@@ -126,6 +143,22 @@
         </div>
     </div>
 
+    <!-- Outstanding orders-->
+    <div id="to_deliver">
+        <h2 style="color: white" id="outstanding"> Outstanding orders</h2>
+        <div id="gen_to_deliver"></div>
+    </div>
+
+    <!-- Past orders -->
+    <div id="paid">
+
+    </div>
+
+    <!-- Modify menu -->
+    <div id="edit_menu_div">
+        <div id="gen_edit_menu_div"></div>
+    </div>
+
     <!-- COMMENT POPUP-->
     <div id="comment-popup">
         <form>
@@ -163,6 +196,16 @@
     let beers = allBeverages_type("Öl");
     let wines = allBeverages_type("vin");
     let spirits = allBeverages_type('sprit');
+
+    // retrieve user info
+    let current_language = sessionStorage.getItem("language");
+    change_lang(current_language);
+
+    if ("current_user" in sessionStorage){
+        let current_username = sessionStorage.getItem("current_user");
+        let current_user = get_user_details(current_username);
+        load_login_content(current_user);
+    }
 
 </script>
 

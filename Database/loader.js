@@ -107,7 +107,33 @@ function allBeverages() {
     //
     return collector;
 }
+// get all orders
+function allOrders(){
+    var collector = [];
+    for(i=0; i< DB.bought.length; i++){
+        collector.push([DB.bought[i].transaction_id,
+                        DB.bought[i].admin_id,
+                        DB.bought[i].beer_id,
+                        DB.bought[i].amount,
+                        DB.bought[i].price,
+                        DB.bought[i].timestamp
+        ]);
+    }
+}
 
+
+
+// change the availability of a spirit
+function edit_availability(spirit_id, new_val){
+    // First we find the spiritID in the spirit database.
+    for (i = 0; i < DB.users.length; i++) {
+        if (DB2.spirits[i].nr === spirit_id) {
+            DB2.spirits[i].kvantitet = new_val;
+        };
+    };
+
+
+}
 // =====================================================================================================
 // This function returns the names of all strong beverages (i.e. all that contain a percentage of alcohol
 // higher than the strength given in percent.
