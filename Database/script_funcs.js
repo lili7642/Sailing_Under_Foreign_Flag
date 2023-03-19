@@ -362,6 +362,9 @@ function load_different_views(view){
         // only generate the first time
         if ($("#gen_edit_menu_div").html() === ""){
             display_edit_menu();
+        } else {
+            $("#gen_edit_menu_div").empty();
+            display_edit_menu();
         }
     }
     else if (view == "curr"){
@@ -371,6 +374,9 @@ function load_different_views(view){
         $('#to_deliver').show();
         // only generate the first time
         if ($("#gen_to_deliver").html() === ""){
+            retrieve_orders();
+        } else {
+            $("#gen_to_deliver").empty();
             retrieve_orders();
         }
 
