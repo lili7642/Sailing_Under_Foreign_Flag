@@ -10,7 +10,7 @@
     <script src="Database/database_scripts.js"></script>
     <script src="Database/script_funcs.js"></script>
     <script src="Database/draganddrop.js"></script>
-    <script src="Database/undoredo.js"></script>
+    <script src="Database\undoredo.js"></script>
     <script src="Database/language_script.js"></script>
     <link rel="stylesheet" href="login_style.css">
 </head>
@@ -28,9 +28,8 @@
             <button class="language-button" id="english-button" onclick="change_lang('en')"><b>ENG</b></button>
             <button class="language-button" id="turkish-button" onclick="change_lang('tr')"><b>TUR</b></button>
             <button class="language-button" id="german-button" onclick="change_lang('de')"><b>GER</b></button>
-            <button id="undo">Undo</button>
-            <button id="redo">Redo</button>
-            <textarea id="textarea"></textarea>
+            <button id="undo-btn" disabled>Undo</button>
+            <button id="redo-btn" disabled>Redo</button>
 
         </div>
     </div>
@@ -201,10 +200,8 @@
 
 
     <!-- INFO POPUP -->
-    <div id="info-popup"></div>
-    <!-- BARTENDER ON THE WAY -->
-    <div id="bartender-otw-popup", onclick = "style = 'display: none'">
-        <form id="bartender-otw"></form>
+    <div id="info-popup">
+
     </div>
 
 </body>
