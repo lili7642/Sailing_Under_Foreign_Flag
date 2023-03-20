@@ -13,6 +13,8 @@ h1{
     font-family: "Comic Sans MS";
 }
 
+
+/* Different content views */
 #switch-view{
     display:none;
     position:fixed;
@@ -49,6 +51,9 @@ h1{
     font-size: 14px;
     font-weight: bold;
 }
+
+/* Languages */
+
 
 #language-button-container{
     margin-left: 5%;
@@ -381,6 +386,49 @@ input[type="text"], input[type="password"] {
     border-top-right-radius: 10px;
 }
 
+
+/* same for edit menu */
+#edit_menu_div {
+
+    /*display: none;*/
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 5%;
+}
+
+#edit-menu-categories{
+    display: flex;
+    justify-content: space-between;
+    border: 3px solid #ccc;
+    border-bottom: none;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    background-color: #f2f2f2;
+
+}
+
+.edit-menu-category{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 25%;
+    height: 50px;
+    background-color: #f2f2f2;
+    border-right: 2px solid #ccc;
+    border-bottom: 2px solid #ccc;
+    font-size: 30px;
+    cursor: pointer;
+}
+
+#edit-beer-category{
+    border-top-left-radius: 10px;
+}
+#edit-other-category{
+    border-top-right-radius: 10px;
+}
+
+/* now into concrete def of menu items */
+
 .menu-item-wrapper{
     background-color: #f2f2f2;
     overflow-y: auto;
@@ -391,6 +439,59 @@ input[type="text"], input[type="password"] {
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
 }
+
+.edit-menu-item-wrapper{
+    background-color: #f2f2f2;
+    overflow-y: auto;
+    /*height: 330px;*/
+    height: 100%;
+    border: 3px solid #ccc;
+    border-top: none;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.edit-price-form{
+    position: relative;
+    display: inline;
+    align-items: normal;
+    padding:none;
+    display: inline-list-item;
+    justify-content: space-between;
+    border:none;
+    box-shadow: none;
+    background-color: #f2f2f2;
+
+}
+
+.currency-wrap{
+    font-family: "Comic Sans MS";
+    font-weight: bold;
+}
+.edit-price-form:hover{
+    background-color: lightgray;
+}
+
+.edit-price-field{
+    padding:10px;
+    margin-right: 5px;
+    display: inline-list-item;
+}
+
+.edit-price-button{
+    display: inline-list-item;
+    margin-left: 5px;
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 12px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
 
 
 .menu-item {

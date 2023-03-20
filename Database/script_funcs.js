@@ -312,19 +312,25 @@ async function place_order(){
 
 }
 
-function load_all_beverages(credentials){
-    load_beverages("#beer-menu", beers, credentials);
-    load_beverages("#wine-menu", wines, credentials);
-    load_beverages("#spirit-menu", spirits, credentials);
+function load_all_beverages(purpose){
+    if (purpose == "edit"){
+        load_beverages("#edit-beer-menu", beers, purpose);
+        load_beverages("#edit-wine-menu", wines, purpose);
+        load_beverages("#edit-spirit-menu", spirits, purpose);
+    } else{
+        load_beverages("#beer-menu", beers, purpose);
+        load_beverages("#wine-menu", wines, purpose);
+        load_beverages("#spirit-menu", spirits, purpose);
+        // ADD CLICK FUNCTION TO ORDER BUTTON
+        $('#order-button').on("click",function (){
+            show_table_popup();
+        });
+    }
 
-    // ADD CLICK FUNCTION TO ORDER BUTTON
-    $('#order-button').on("click",function (){
-        show_table_popup();
-    });
 }
 
 // TODO: modify based on credentials
-function load_beverages(divToLoad, bevList, credentials){
+function load_beverages(divToLoad, bevList, purpose){
     let menuDiv = $(divToLoad);
     for (let beverage of bevList) {
         // only display available
@@ -340,12 +346,31 @@ function load_beverages(divToLoad, bevList, credentials){
 
             // STACK THEM
             someWrapper.append(itemName);
+
             someWrapper.append(infoButton);
             someWrapper.append(availability);
 
 
-            menuItem.append(someWrapper);
-            menuItem.append(itemButton);
+
+            if (purpose=="menu"){
+                menuItem.append(someWrapper);
+                menuItem.append(itemButton);
+            } else {
+                let form_span = $('<span class="edit_price_span"></span>')
+                let item_form = $('<form class="edit-price-form" id="'+ beverage.artikelid +'-editprice"></form>');
+
+                let item_edit_price_button = $('<button class="edit-price-button" id="'+ beverage.artikelid +'-editbutton"> edit </button>');
+                let edit_price_textfield = $('<input type="number" class="edit-price-text" id="'+ beverage.artikelid +'-pricefield" placeholder="'+beverage.price+'">');
+                let currency_text = $('<span class="currency_span">SEK</span>');
+                item_form.append(edit_price_textfield);
+                item_form.append(currency_text);
+                item_form.append(item_edit_price_button);
+                form_span.append(item_form);
+                someWrapper.append(form_span);
+                menuItem.append(someWrapper);
+                // menuItem.append(form_span);
+            }
+
             menuDiv.append(menuItem).hide();
 
             // ADD CLICK FUNCTIONS TO ORDER BUTTON AND INFO BUTTON
@@ -361,20 +386,37 @@ function show_menu(type){
     $('#' + type).show();
 }
 
-function choose_category_function(divId){
+function choose_category_function(divId, purpose){
     let thisDiv = $('#'+divId);
-    let otherDivs = $('.menu-category');
+    let otherDivs;
+    if (purpose=="menu"){
+        otherDivs = $('.menu-category');
+    }  else {
+        otherDivs = $('.edit-menu-category');
+    }
+
 
     otherDivs.css("background-color", "lightgrey").css("border-bottom", "2px solid #ccc");
     thisDiv.css("border-bottom",  "none").css("background-color", "#f2f2f2");
 
-    if(divId === "beer-category"){
-        show_menu('beer-menu');
-    }else if(divId === "wine-category"){
-        show_menu('wine-menu');
-    }else if(divId === "spirit-category"){
-        show_menu('spirit-menu');
+    if (purpose == "menu"){
+        if(divId === "beer-category"){
+            show_menu('beer-menu');
+        }else if(divId === "wine-category"){
+            show_menu('wine-menu');
+        }else if(divId === "spirit-category"){
+            show_menu('spirit-menu');
+        }
+    } else {
+        if(divId === "edit-beer-category"){
+            show_menu('edit-beer-menu');
+        }else if(divId === "edit-wine-category"){
+            show_menu('edit-wine-menu');
+        }else if(divId === "edit-spirit-category"){
+            show_menu('edit-spirit-menu');
+        }
     }
+
 }
 
 function load_different_views(view){
@@ -385,7 +427,7 @@ function load_different_views(view){
         $('#edit_menu_div').hide();
     }
     else if (view == "edit_menu"){
-        $('#menu').show();
+        $('#menu').hide();
         $('#order').hide();
         $('#to_deliver').hide();
         $('#edit_menu_div').show();
@@ -421,6 +463,12 @@ function load_different_views(view){
 
 // display all items to be able to modify them
 function display_edit_menu(){
+    load_all_beverages("edit");
+    // start with beer showing
+    $('#edit-beer-menu').show();
+    let editCategoryButtons = $('.edit-menu-category');
+    editCategoryButtons.css("background-color", "lightgrey").css("border-bottom", "2px solid #ccc");
+    $('#beer-category').css("border-bottom",  "none").css("background-color", "#f2f2f2");
 }
 
 
@@ -474,9 +522,3 @@ function retrieve_orders(){
         orderDiv.append(orderItem);
     }
 }
-
-
-function set_table(){
-
-}
-

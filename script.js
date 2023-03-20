@@ -20,8 +20,15 @@ $(function() {
     // CATEGORY BUTTONS ------------------------------------------------------------------
     let categoryButtons = $('.menu-category');
     categoryButtons.on("click", function(){
-        choose_category_function(this.id);
+        choose_category_function(this.id, "menu");
     });
+
+    // same for edit ---------------------------------------------------------------------
+    let editCategoryButtons = $('.edit-menu-category');
+    editCategoryButtons.on("click", function(){
+        choose_category_function(this.id, "edit");
+    });
+
 
     // table popup -------------------------------
     $('#confirm-table').on("click",function(e) {
@@ -32,7 +39,7 @@ $(function() {
     });
 
     // LOAD THE MENU ---------------------------------------------------------------------
-    load_all_beverages(4);
+    load_all_beverages("menu");
     // start with beer showing
     $('#beer-menu').show();
 
