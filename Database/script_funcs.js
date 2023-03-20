@@ -366,12 +366,10 @@ function load_beverages(divToLoad, bevList, purpose){
                 let currency_text = $('<span class="currency_span">SEK</span>');
 
                 item_edit_price_button.click(function (e){
-                    // edit_price(beverage)
-                    // $('#test').append(beverage.artikelid);
                     e.preventDefault();
+                    // retrieve new price from form
                     let new_price = $('#' + beverage.artikelid + '-pricefield').val();
-                    $('#test').append(new_price);
-
+                    edit_price(beverage.artikelid,new_price);
                 });
 
                 item_form.append(edit_price_textfield);
@@ -540,12 +538,10 @@ function retrieve_orders(){
     }
 }
 
-function edit_price(beverage){
-    // retrieve new price from form
-    let new_price = $('#' + beverage.artikelid + 'pricefield').val();
+function edit_price(beverage, new_price){
     // edit price of database item
     for (i = 0; i < DB2.spirits.length; i++) {
-        if(DB2.spirits[i].artikelid === beverage.artikelid){
+        if(DB2.spirits[i].artikelid === beverage){
             DB2.spirits[i].prisinklmoms = new_price;
         }
     }
