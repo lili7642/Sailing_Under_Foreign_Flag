@@ -125,6 +125,27 @@ button:hover{
     font-weight: bold;
 }
 
+/* Table popup */
+#table_popup{
+    display:none;
+}
+#table-input{
+    padding: 7px;
+    border-radius: 5px;
+}
+
+#confirm-table{
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 12px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
 
 /* LOGIN POPUP */
 #login-popup{

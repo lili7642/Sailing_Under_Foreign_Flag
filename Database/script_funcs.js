@@ -42,6 +42,20 @@ function show_login_popup(){
     });
 }
 
+// ask which table to deliver to
+function show_table_popup(){
+    $('#table_popup').show();
+    $('#confirm-table').on("click",function(e) {
+        e.preventDefault();
+        let new_table = $('#table-input').val();
+        $('#table-input').val('');
+        $('#table_popup').hide();
+        return new_table;
+    });
+
+
+}
+
 function load_login_content(current_user){
     //LOAD USER INFO DIV
     load_user_box(current_user);
@@ -255,6 +269,7 @@ function update_total(){
 
 
 function place_order(){
+    show_table_popup();
 
     // collect what needs to be put into DB.ordered
     let order_keys = Object.keys(order);
@@ -306,6 +321,11 @@ function load_all_beverages(credentials){
     load_beverages("#beer-menu", beers, credentials);
     load_beverages("#wine-menu", wines, credentials);
     load_beverages("#spirit-menu", spirits, credentials);
+
+    // ADD CLICK FUNCTION TO ORDER BUTTON
+    $('#order-button').on("click",function (){
+        place_order();
+    });
 }
 
 // TODO: modify based on credentials
@@ -338,10 +358,7 @@ function load_beverages(divToLoad, bevList, credentials){
             infoButton.click(function () {show_info_popup(beverage);});
         }
     }
-    // ADD CLICK FUNCTION TO ORDER BUTTON
-    $('#order-button').on("click",function (){
-        place_order();
-    });
+
 }
 
 function show_menu(type){
@@ -461,5 +478,10 @@ function retrieve_orders(){
         // orderItem.append(hasPaidButton);
         orderDiv.append(orderItem);
     }
+}
+
+
+function set_table(){
+
 }
 
