@@ -42,7 +42,8 @@ dict = {
             'edit_menu_view',
             'current_order_view',
             'past-order_view',
-            'outstanding'
+            'outstanding',
+            'bartender-otw'
     ],
 
     // We use one JSON substructure for each language. If we have
@@ -74,7 +75,8 @@ dict = {
         'edit_menu_view': 'edit menu',
         'current_order_view': 'current orders',
         'past-order_view': 'past orders',
-        'outstanding': 'outstanding'
+        'outstanding': 'outstanding',
+        'bartender-otw': 'A bartender is on the way'
     },
     'sv' : {
         'guest-mode-text' : "Du tittar som gäst.",
@@ -100,7 +102,8 @@ dict = {
         'edit_menu_view': 'Redigera menu',
         'current_order_view': 'Aktuella beställningar',
         'past-order_view': 'Tidigare beställningar',
-        'outstanding': 'outstanding'
+        'outstanding': 'outstanding',
+        'bartender-otw': 'En bartender är påväg'
     },
     // FILL WITH TURKISH TRANSLATION
     'tr': {
@@ -127,7 +130,8 @@ dict = {
         'edit_menu_view': 'menüyü düzenle',
         'current_order_view': 'şuanki sipariş',
         'past-order_view': 'geçmiş sipariş',
-        'outstanding': 'kullanılamaz'
+        'outstanding': 'kullanılamaz',
+        'bartender-otw': 'A bartender is on the way'
     },
 
     'de': {
@@ -154,7 +158,8 @@ dict = {
         'edit_menu_view': 'Menü bearbeiten',
         'current_order_view': 'Aktuelle Bestellungen',
         'past-order_view': 'Alte Bestellungen',
-        'outstanding': 'Aktuelle Bestellungen'
+        'outstanding': 'Aktuelle Bestellungen',
+        'bartender-otw': 'A bartender is on the way'
     },
 }
 
