@@ -23,6 +23,13 @@ $(function() {
         choose_category_function(this.id);
     });
 
+    // table popup -------------------------------
+    $('#confirm-table').on("click",function(e) {
+        e.preventDefault();
+        table = $('#table-input').val();
+        $('#table_popup').hide();
+        place_order();
+    });
 
     // LOAD THE MENU ---------------------------------------------------------------------
     load_all_beverages(4);

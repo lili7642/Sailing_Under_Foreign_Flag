@@ -45,15 +45,6 @@ function show_login_popup(){
 // ask which table to deliver to
 function show_table_popup(){
     $('#table_popup').show();
-    $('#confirm-table').on("click",function(e) {
-        e.preventDefault();
-        let new_table = $('#table-input').val();
-        $('#table-input').val('');
-        $('#table_popup').hide();
-        return new_table;
-    });
-
-
 }
 
 function load_login_content(current_user){
@@ -268,10 +259,9 @@ function update_total(){
 }
 
 
-function place_order(){
-    show_table_popup();
 
-    // collect what needs to be put into DB.ordered
+async function place_order(){
+
     let order_keys = Object.keys(order);
     let order_vals = Object.values(order);
     let dict = [];
@@ -285,13 +275,18 @@ function place_order(){
 
     add_order_to_ordered(
         {"transaction_id": last_ordered_id()+1,
-               "table": "4",
-               "order_dict": dict,
-               "price": orderTotal,
-               "timestamp":Date.now(),
-               "paid": "no"
+            "table": table,
+            "order_dict": dict,
+            "price": orderTotal,
+            "timestamp":Date.now(),
+            "paid": "no"
         }
     );
+
+
+
+
+
 
     // RESET ORDER TOTAL AND ORDER LIST
     let temp_total = orderTotal;
@@ -324,7 +319,7 @@ function load_all_beverages(credentials){
 
     // ADD CLICK FUNCTION TO ORDER BUTTON
     $('#order-button').on("click",function (){
-        place_order();
+        show_table_popup();
     });
 }
 
