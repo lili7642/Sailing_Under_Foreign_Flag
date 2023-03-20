@@ -340,28 +340,40 @@ function load_beverages(divToLoad, bevList, purpose){
             let itemName = $('<span class="item-name"></span>').text(beverage.namn);
             let infoButton = $('<span class="info-button"></span>').html(' &#9432');
             let itemButton = $('<button class="item-button"></button>').text(beverage.prisinklmoms + ' SEK');
-            let availability = $('<span class="item-availability"></span>').text(beverage.kvantitet);
+            let availability = $('<span class="item-availability"></span>').text(beverage.kvantitet + " in stock");
             let someWrapper = $('<div></div>');
 
 
             // STACK THEM
             someWrapper.append(itemName);
-
             someWrapper.append(infoButton);
-            someWrapper.append(availability);
 
-
+            // only display availability for authorized users (Manager / Bartender / Waiter)
+            if (purpose == "edit"){
+                someWrapper.append(availability);
+            }
 
             if (purpose=="menu"){
                 menuItem.append(someWrapper);
                 menuItem.append(itemButton);
             } else {
+                // generate a form to edit the price
                 let form_span = $('<span class="edit_price_span"></span>')
                 let item_form = $('<form class="edit-price-form" id="'+ beverage.artikelid +'-editprice"></form>');
 
                 let item_edit_price_button = $('<button class="edit-price-button" id="'+ beverage.artikelid +'-editbutton"> edit </button>');
                 let edit_price_textfield = $('<input type="number" class="edit-price-text" id="'+ beverage.artikelid +'-pricefield" placeholder="'+beverage.prisinklmoms+'">');
                 let currency_text = $('<span class="currency_span">SEK</span>');
+
+                item_edit_price_button.click(function (e){
+                    // edit_price(beverage)
+                    // $('#test').append(beverage.artikelid);
+                    e.preventDefault();
+                    let new_price = $('#' + beverage.artikelid + '-pricefield').val();
+                    $('#test').append(new_price);
+
+                });
+
                 item_form.append(edit_price_textfield);
                 item_form.append(currency_text);
                 item_form.append(item_edit_price_button);
@@ -525,5 +537,16 @@ function retrieve_orders(){
         orderItem.append(simpleSpan);
         // orderItem.append(hasPaidButton);
         orderDiv.append(orderItem);
+    }
+}
+
+function edit_price(beverage){
+    // retrieve new price from form
+    let new_price = $('#' + beverage.artikelid + 'pricefield').val();
+    // edit price of database item
+    for (i = 0; i < DB2.spirits.length; i++) {
+        if(DB2.spirits[i].artikelid === beverage.artikelid){
+            DB2.spirits[i].prisinklmoms = new_price;
+        }
     }
 }
