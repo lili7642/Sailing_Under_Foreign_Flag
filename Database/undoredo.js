@@ -1,43 +1,35 @@
-// Create an array to store the history of changes to the textarea
-const history = [];
-let currentPosition = -1;
+const undoBtn = document.getElementById('undo-btn');
+const redoBtn = document.getElementById('redo-btn');
+const undoRedo = new UndoRedo();
 
-// Get the textarea element
-const textarea = document.getElementById("textarea");
+// Add a new action to the undo/redo stack whenever a change is made
+function onInputChange() {
+  const action = new Action(/* do function */, /* undo function */);
+  undoRedo.add(action);
+  updateButtons();
+}
 
-// Add an event listener to the textarea to track changes
-textarea.addEventListener("input", () => {
-  // Remove all changes that were undone
-  history.splice(currentPosition + 1, history.length - currentPosition - 1);
+// Update the enabled/disabled state of the undo/redo buttons based on the state of the undo/redo stack
+function updateButtons() {
+  undoBtn.disabled = undoRedo.index < 0;
+  redoBtn.disabled = undoRedo.index >= undoRedo.actions.length - 1;
+}
 
-  // Add the new change to the history array
-  history.push(textarea.value);
-
-  // Update the current position in the history array
-  currentPosition = history.length - 1;
+// Undo the most recent action when the undo button is clicked
+undoBtn.addEventListener('click', () => {
+  undoRedo.undo();
+  updateButtons();
 });
 
-// Get the undo and redo buttons
-const undoButton = document.getElementById("undo");
-const redoButton = document.getElementById("redo");
-
-// Add event listeners to the buttons
-undoButton.addEventListener("click", () => {
-  if (currentPosition > 0) {
-    // Decrement the current position in the history array
-    currentPosition--;
-
-    // Set the value of the textarea to the previous value in the history array
-    textarea.value = history[currentPosition];
-  }
+// Redo the most recent undone action when the redo button is clicked
+redoBtn.addEventListener('click', () => {
+  undoRedo.redo();
+  updateButtons();
 });
 
-redoButton.addEventListener("click", () => {
-  if (currentPosition < history.length - 1) {
-    // Increment the current position in the history array
-    currentPosition++;
+// Example event listeners for input changes that will add new actions to the undo/redo stack
+const input1 = document.getElementById('input1');
+input1.addEventListener('input', onInputChange);
 
-    // Set the value of the textarea to the next value in the history array
-    textarea.value = history[currentPosition];
-  }
-});
+const input2 = document.getElementById('input2');
+input2.addEventListener('input', onInputChange);
