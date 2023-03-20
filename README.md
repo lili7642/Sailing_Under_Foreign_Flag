@@ -29,6 +29,7 @@ When opening the project in a webstorm, navigate to main.html and open in a brow
       4) order to a specific table
    3) Emre
       1) UNDO-REDO
+      2) Turkish language support
     
 
 
