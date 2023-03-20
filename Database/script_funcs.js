@@ -1,4 +1,4 @@
-
+// Function that handles the login functionality; shows popup, takes user input, either accepts or not
 function show_login_popup(){
     // PREFILL THE FORM FOR TESTING
     $('#username').val('jorass');
@@ -16,7 +16,7 @@ function show_login_popup(){
         e.preventDefault();
         let username = $('#username').val();
         let password = $('#password').val();
-        let found = login_function(username, password);
+        let found = login_function(username, password); // call actual login function
 
         if (found){
             // UPDATE LOGGED IN USER
@@ -26,7 +26,7 @@ function show_login_popup(){
             // save being logged in
             sessionStorage.setItem("current_user", current_user.username);
 
-            load_login_content(current_user);
+            load_login_content(current_user); // load user box
 
         }else{
             //DONT LOAD PAGE, LOGIN FAILED
@@ -36,7 +36,7 @@ function show_login_popup(){
 
     // LOGIN AS GUEST
     $('#login_as_guest').on("click",function(){
-        //LOAD WEBPAGE IN GUEST MODE, NO ORDERING OR CREDIT
+        //LOAD WEBPAGE IN GUEST MODE, NO CREDIT
         $('#login-popup').hide();
 
     });
@@ -74,22 +74,19 @@ function show_different_views(current_user){
     }
 }
 
+// Function that checks if entered username and password is correct, returns true/false
 function login_function(username, password){
     // CHECK LOGIN BY LOOPING THROUGH ALL STORED USERNAMES AND PASSWORDS
     let found = false;
-    let firstname, lastname;
-    for (let user of users) {
-        if(user.username === username && user.password === password){
+    for (let user of users) { // loop through all user in database
+        if(user.username === username && user.password === password){ // if match is found, set found = true
             found = true;
-            firstname = user.first_name;
-            lastname = user.last_name;
         }
     }
-
     return found;
-
 }
 
+// Functions that logs out the user and resets all user-related variables
 function logout_function(){
     // hide user stuff
     $('#user-info').hide();
@@ -114,20 +111,22 @@ function logout_function(){
 
 }
 
+// Function that loads the box at the top which shows relevant information about the logged in user
 function load_user_box(user_info){
+    // hide login form
     $('#login-popup').hide();
     $('#not-logged-in-wrapper').hide();
+    // show user box and fill in relevant information
     $('#user-info').show();
     $('#name').html("<b>" + user_info.first_name + " " + user_info.last_name + ", </b>");
     $('#status').html(credentials_dict[user_info.credentials]);
+    // show credit and deposit button
     $('#credit-number').text(get_balance(user_info) + " SEK");
-
-    if(user_info.credentials < 4){
-        $('#deposit-button').show();
-    }
+    $('#deposit-button').show();
 
 }
 
+// Function that shows a popup for depositing money, takes a user amount input and updates the users credit
 function show_deposit_popup(){
     // READ MONEY TO DEPOSIT
     $('#popup form').submit(function (e){
@@ -148,9 +147,10 @@ function show_deposit_popup(){
     });
 }
 
-
+// Function that shows information for a given beverage in the menu
 function show_info_popup(beverage){
     // showing the info popup and setting the text
+    // inefficient way of doing it but it works
     $('#info-popup').show().html(
         '<form>' +
                 '<label>'+beverage.namn+'</label>' +
@@ -163,6 +163,7 @@ function show_info_popup(beverage){
 }
 
 
+// Function for adding comment to an item in the order basket
 function add_comment(beverage, commentDiv){
 
     let comment;
@@ -185,20 +186,14 @@ function add_comment(beverage, commentDiv){
         // add comment div in order
         commentDiv.text(comment).show();
 
-        $(this).off("click"); // without this each comment button changes every comment
+        $(this).off("click");    // without this each comment button changes every comment,
                                     // a new function is attached to the submit comment button
                                     // every time we comment
     });
 }
 
-
+// Function for adding an item to the order basket
 function add_to_order(beverage) {
-    //if(!current_user){
-    //    alert("log in to order");
-    //    return;
-   // }
-
-
     // IF BEVERAGE ALREADY IN ORDER, CHANGE THE DIV INSTEAD OF ADDING
     if (beverage.namn in order){
         order[beverage.namn] += 1;
@@ -251,12 +246,13 @@ function add_to_order(beverage) {
     edit_availability(beverage.nr, new_quantity);
 }
 
+// Function for updating the order total
 function update_total(){
     $('#order-total-number').text(orderTotal.toFixed(2) + ' SEK');
 }
 
 
-
+// Function for placing the order, and if logged in pay with credit
 async function place_order(){
 
     let isPaid = "no"; // will be sent to database
