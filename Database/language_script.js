@@ -42,8 +42,7 @@ dict = {
             'edit_menu_view',
             'current_order_view',
             'past-order_view',
-            'outstanding',
-            'bartender-otw'
+            'outstanding'
     ],
 
     // We use one JSON substructure for each language. If we have
@@ -75,8 +74,7 @@ dict = {
         'edit_menu_view': 'edit menu',
         'current_order_view': 'current orders',
         'past-order_view': 'past orders',
-        'outstanding': 'outstanding',
-        'bartender-otw': 'A bartender will be with you shortly'
+        'outstanding': 'outstanding'
     },
     'sv' : {
         'guest-mode-text' : "Du tittar som gäst.",
@@ -102,36 +100,34 @@ dict = {
         'edit_menu_view': 'Redigera menu',
         'current_order_view': 'Aktuella beställningar',
         'past-order_view': 'Tidigare beställningar',
-        'outstanding': 'Aktuella beställningar',
-        'bartender-otw': 'En bartender är påväg'
+        'outstanding': 'outstanding'
     },
     // FILL WITH TURKISH TRANSLATION
     'tr': {
-        'guest-mode-text' : "You are in guest mode.",
-        'show-login-popup-button': "Press to login",
+        'guest-mode-text' : "Ziyaretci modundasınız.",
+        'show-login-popup-button': "Giriş yapmak icin tıklayınız",
         'menu-header' : 'Menu',
-        'username-label' : 'Username:',
-        'password-label' : 'Password:',
-        'login-button' : 'Login',
-        'login_as_guest' : 'Continue as guest',
-        'credit-label' : 'Balance: ', //Include space at the end
-        'deposit-button' : 'Deposit money',
-        'logout-button' : 'Logout',
-        'deposit-popup-label' : 'Enter amount to add:',
-        'deposit-popup-button' : 'Add to balance',
-        'current-order-label' : 'Current Order',
-        'empty-order-message' : 'Your order is empty',
-        'thank-you-order-message' : 'Thank you for your order',
-        'order-button' : 'Place order',
+        'username-label' : 'Kullanıcı ismi:',
+        'password-label' : 'Parola:',
+        'login-button' : 'Giris yap',
+        'login_as_guest' : 'Misafir olarak devam et',
+        'credit-label' : 'Denge: ', //Include space at the end
+        'deposit-button' : 'Deposit para',
+        'logout-button' : 'Cıkıs yap',
+        'deposit-popup-label' : 'Para ekle:',
+        'deposit-popup-button' : 'Denge ekle',
+        'current-order-label' : 'Anlık sipariş',
+        'empty-order-message' : 'Siparişiniz yok',
+        'thank-you-order-message' : 'Siparişiniz için teşekkürler',
+        'order-button' : 'Sipariş gir',
         'order-total-label' : 'Total: ', //Include space at the end
-        'comment-popup-label' : 'Add comment to ', //Include space at the end
-        'comment-submit' : 'Add comment',
+        'comment-popup-label' : 'Yorum ekle buna ', //Include space at the end
+        'comment-submit' : 'Yorum ekle',
         'menu_view': 'menu',
-        'edit_menu_view': 'edit menu',
-        'current_order_view': 'current orders',
-        'past-order_view': 'past orders',
-        'outstanding': 'Current orders',
-        'bartender-otw': 'A bartender will be with you shortly'
+        'edit_menu_view': 'menüyü düzenle',
+        'current_order_view': 'şuanki sipariş',
+        'past-order_view': 'geçmiş sipariş',
+        'outstanding': 'kullanılamaz'
     },
 
     'de': {
@@ -158,8 +154,7 @@ dict = {
         'edit_menu_view': 'Menü bearbeiten',
         'current_order_view': 'Aktuelle Bestellungen',
         'past-order_view': 'Alte Bestellungen',
-        'outstanding': 'Aktuelle Bestellungen',
-        'bartender-otw': 'A bartender will be with you shortly'
+        'outstanding': 'Aktuelle Bestellungen'
     },
 }
 
