@@ -277,7 +277,7 @@ async function place_order(){
         {"transaction_id": last_ordered_id()+1,
             "table": table,
             "order_dict": dict,
-            "price": orderTotal,
+            "price": orderTotal.toFixed(2),
             "timestamp":Date.now(),
             "paid": "no"
         }
