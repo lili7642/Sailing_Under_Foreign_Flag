@@ -36,11 +36,15 @@ h1{
 
 }
 
+.switch-button:hover{
+    background-color: #4CAF50;
+}
+
 #menu_view{
     border-top-right-radius: 5px;
 }
 
-#past-order_view{
+#edit_menu_view{
     border-bottom: 3px solid #ccc;
     border-bottom-right-radius: 5px;
 }

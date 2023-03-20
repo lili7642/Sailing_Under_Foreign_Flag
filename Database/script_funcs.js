@@ -360,7 +360,7 @@ function load_beverages(divToLoad, bevList, purpose){
                 let item_form = $('<form class="edit-price-form" id="'+ beverage.artikelid +'-editprice"></form>');
 
                 let item_edit_price_button = $('<button class="edit-price-button" id="'+ beverage.artikelid +'-editbutton"> edit </button>');
-                let edit_price_textfield = $('<input type="number" class="edit-price-text" id="'+ beverage.artikelid +'-pricefield" placeholder="'+beverage.price+'">');
+                let edit_price_textfield = $('<input type="number" class="edit-price-text" id="'+ beverage.artikelid +'-pricefield" placeholder="'+beverage.prisinklmoms+'">');
                 let currency_text = $('<span class="currency_span">SEK</span>');
                 item_form.append(edit_price_textfield);
                 item_form.append(currency_text);
@@ -381,8 +381,13 @@ function load_beverages(divToLoad, bevList, purpose){
 
 }
 
-function show_menu(type){
-    $('.menu-item-wrapper').hide();
+function show_menu(type, purpose){
+    if (purpose == "menu"){
+        $('.menu-item-wrapper').hide();
+    } else {
+        $('.edit-menu-item-wrapper').hide();
+    }
+
     $('#' + type).show();
 }
 
@@ -401,19 +406,19 @@ function choose_category_function(divId, purpose){
 
     if (purpose == "menu"){
         if(divId === "beer-category"){
-            show_menu('beer-menu');
+            show_menu('beer-menu', "menu");
         }else if(divId === "wine-category"){
-            show_menu('wine-menu');
+            show_menu('wine-menu', "menu");
         }else if(divId === "spirit-category"){
-            show_menu('spirit-menu');
+            show_menu('spirit-menu', "menu");
         }
     } else {
         if(divId === "edit-beer-category"){
-            show_menu('edit-beer-menu');
+            show_menu('edit-beer-menu', "edit");
         }else if(divId === "edit-wine-category"){
-            show_menu('edit-wine-menu');
+            show_menu('edit-wine-menu', "edit");
         }else if(divId === "edit-spirit-category"){
-            show_menu('edit-spirit-menu');
+            show_menu('edit-spirit-menu', "edit");
         }
     }
 
