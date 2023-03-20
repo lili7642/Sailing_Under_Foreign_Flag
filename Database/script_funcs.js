@@ -57,9 +57,6 @@ function load_login_content(current_user){
     //LOAD ORDER DIV
     orderTotal = 0;
     $('#menu-item-wrapper').css("height","330px");
-    $('#order').show();
-    update_total();
-
 }
 
 function show_different_views(current_user){
@@ -196,10 +193,10 @@ function add_comment(beverage, commentDiv){
 
 
 function add_to_order(beverage) {
-    if(!current_user){
-        alert("log in to order");
-        return;
-    }
+    //if(!current_user){
+    //    alert("log in to order");
+    //    return;
+   // }
 
 
     // IF BEVERAGE ALREADY IN ORDER, CHANGE THE DIV INSTEAD OF ADDING
@@ -262,6 +259,20 @@ function update_total(){
 
 async function place_order(){
 
+    let isPaid = "no"; // will be sent to database
+
+    // If not logged in, a bartender will be sent to table
+    if(!current_user || current_user.credentials >= 4){
+        $("#bartender-otw-popup").show();
+    }
+    // if logged in with right credentials, pay with credit
+    else if(current_user.credentials < 4){
+        // Pays with credit
+        current_balance = (Number(current_balance) - Number(orderTotal));
+        $('#credit-number').text(current_balance.toFixed(2).toString() + " SEK");
+        isPaid = "yes"; // mark order as paid
+    }
+
     let order_keys = Object.keys(order);
     let order_vals = Object.values(order);
     let dict = [];
@@ -273,20 +284,17 @@ async function place_order(){
         });
     }
 
+    // Handle guests and vips differently:
+
     add_order_to_ordered(
         {"transaction_id": last_ordered_id()+1,
             "table": table,
             "order_dict": dict,
             "price": orderTotal.toFixed(2),
             "timestamp":Date.now(),
-            "paid": "no"
+            "paid": isPaid
         }
     );
-
-
-
-
-
 
     // RESET ORDER TOTAL AND ORDER LIST
     let temp_total = orderTotal;
@@ -299,17 +307,6 @@ async function place_order(){
     $('.comment').remove();
     // SHOW MESSAGE THAT BASKET IS EMPTY
     $('#thank-you-order-message').show();
-
-
-
-
-
-    if(current_user.credentials < 4){
-        // Pays with credit
-        current_balance -= temp_total;
-        $('#credit').html("<b>Balance: </b>" + current_balance.toFixed(2) + " SEK");
-    }
-
 }
 
 function load_all_beverages(purpose){

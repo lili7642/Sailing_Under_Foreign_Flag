@@ -46,7 +46,8 @@ $(function() {
     categoryButtons.css("background-color", "lightgrey").css("border-bottom", "2px solid #ccc");
     $('#beer-category').css("border-bottom",  "none").css("background-color", "#f2f2f2");
 
-
-
+    // SHOW ORDER BASKET -----------------------------------------------------------------
+    $('#order').show();
+    update_total();
 
 });

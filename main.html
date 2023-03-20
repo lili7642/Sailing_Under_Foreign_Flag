@@ -196,8 +196,11 @@
 
 
     <!-- INFO POPUP -->
-    <div id="info-popup">
+    <div id="info-popup"></div>
 
+    <!-- BARTENDER ON THEIR WAY POPUP -->
+    <div id="bartender-otw-popup", onclick="style='display:none'">
+        <form id="bartender-otw"></form>
     </div>
 
 </body>
@@ -205,10 +208,10 @@
 <script>
     // GLOBAL VARIABLES
     let table;
-    let orderTotal;
+    let orderTotal = 0;
     let order = {};
-    let current_balance;
-    let current_user;
+    let current_balance = 0;
+    let current_user = null;
 
 
 
